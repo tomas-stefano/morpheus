@@ -6,3 +6,15 @@
   cucumber format: :progress, ruby_versions: %w(1.9.2 ree)
   clobber  rm_rf: %w(doc pkg tmp coverage)
 end
+
+class MyTasks < Morpheus::Base
+  task :my_tasks do
+    'my_tasks'
+  end
+end
+
+class MyOtherTasks < Morpheus::Base
+  task :my_tasks do
+    'my_tasks'
+  end
+end
