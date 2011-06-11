@@ -15,8 +15,47 @@ Feature: Invoke normal tasks
     When I run `task example`
     Then the stdout should contain exactly:
     """
-    invoke: :example [namespace: Tasks]
+    [namespace: Tasks]: invoke :example
 	Task Example
+	
+    """
+  
+  Scenario: Invoke a task that dont exist
+    Given a file named "Tasks" with:
+    """
+    class Tasks < Morpheus::Base
+    end
+    """
+    When I run `task example`
+    Then the stdout should contain exactly:
+    """
+	Could not find the task :example in any namespace available.
+
+    """
+
+  Scenario: Invoke this two tasks that exists in two namespaces and warn user
+    Given a file named "Tasks" with:
+    """
+    class Tasks < Morpheus::Base
+      task :exist_in_two_namespaces do
+        say('from Tasks')
+      end
+    end
+
+    class OtherTasks < Morpheus::Base
+	  task :exist_in_two_namespaces do
+		say('from Other Tasks')
+	  end
+    end
+    """
+    When I run `task exist_in_two_namespaces`
+    Then the stdout should contain exactly:
+    """
+    The task :exist_in_two_namespaces appears in 2 namespaces(Tasks, OtherTasks)
+    [namespace: Tasks]: invoke :exist_in_two_namespaces
+    from Tasks
+    [namespace: OtherTasks]: invoke :exist_in_two_namespaces
+    from Other Tasks
 
     """
   

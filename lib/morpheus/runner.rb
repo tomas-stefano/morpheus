@@ -37,11 +37,13 @@ module Morpheus
     # method that will invoke the klass and task.
     #
     def invoke(task_name)
-      task = application.tasks.values.flatten.select { |task| task.task_name.equal?(task_name) }.first
-      if task
-        say("invoke: :#{task_name} [namespace: #{task.namespace}]")
+      results = application.tasks.values.flatten.select { |task| task.task_name.equal?(task_name) }
+      say("The task :#{task_name} appears in #{results.size} namespaces(#{results.collect(&:namespace).join(', ')})") if results.size > 1
+      results.each do |task|
+        say("[namespace: #{task.namespace}]: invoke :#{task_name}")
         task.block.call
       end
+      say("Could not find the task :#{task_name} in any namespace available.") if results.empty?
     end
 
     private
