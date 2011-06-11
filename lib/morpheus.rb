@@ -2,6 +2,7 @@ module Morpheus
   autoload 'Application', 'morpheus/application'
   autoload 'Base', 'morpheus/base'
   autoload 'Runner', 'morpheus/runner'
+  autoload 'Shell', 'morpheus/shell'
   autoload 'Task', 'morpheus/task'
 
   def self.run!
@@ -15,7 +16,6 @@ module Morpheus
   def self.application
     @application ||= Application.new
   end
-
 end
 
 # FIXME: Fix this ugly monkey patch

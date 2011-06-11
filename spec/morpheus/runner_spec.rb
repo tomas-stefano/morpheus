@@ -18,4 +18,13 @@ describe Morpheus::Runner do
       list.application.should be_instance_of(Morpheus::Application)
     end
   end
+
+  describe '#run!' do
+    it 'should invoke a task when method dont exist' do
+      runner = runner_class.new(['my_super_hiper_task'])
+      runner.stub!(:say)
+      runner.should_receive(:invoke).with(:my_super_hiper_task)
+      runner.run!
+    end
+  end
 end
