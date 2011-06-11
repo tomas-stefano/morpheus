@@ -9,15 +9,11 @@ describe Morpheus::Runner do
     it 'should parse argument' do
       list.argument.should equal :list
     end
-    
+
     it 'should parse argument help' do
       help.argument.should equal :help
     end
-    
-    it 'should initialize with the instance of tasks file loader' do
-      help.loader_tasks.should be_instance_of(Morpheus::LoaderTasks)
-    end
-    
+
     it 'should initialize with the application object' do
       list.application.should be_instance_of(Morpheus::Application)
     end

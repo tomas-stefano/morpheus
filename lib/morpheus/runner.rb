@@ -1,34 +1,46 @@
 module Morpheus
   class Runner
     attr_accessor :argument, :loader_tasks, :application
-    
+
     def initialize(command_line_arguments)
       @argument     = command_line_arguments.shift.to_sym
-      @loader_tasks = LoaderTasks.new
-      @application  = Morpheus.application 
+      @application  = Morpheus.application
     end
-    
+
     def run!
+      load_task_file
       send(argument)
     end
-    
-    # REFACTOR ME: THis is code just for all tests pass (Now I will commit and sleep)
+
+    def load_task_file
+      load(File.expand_path('Tasks', Dir.pwd))
+    end
+
+    # List the available Morpheus Tasks
     #
     def list
-      all_tasks = application.tasks
-      if all_tasks.empty?
-        puts "No Morpheus tasks available"
-        exit(1)
-      end
-      all_tasks.keys.each_with_index do |namespace, index|
-        puts if index > 0
-        puts "Namespace: #{namespace}"
-        puts '-' * (11 + namespace.name.size)
-        all_tasks[namespace].each do |task|
-          puts "task :#{task.task_name} # Without Description"
+      verify_if_tasks_exist!
+      print_all_tasks!
+    end
+
+    private
+      def verify_if_tasks_exist!
+        if application.tasks.empty?
+          puts "No Morpheus tasks available"
+          exit(1)
         end
       end
-    end
-    
+
+      def print_all_tasks!
+        application.tasks.keys.each_with_index do |namespace, index|
+          puts if index > 0
+          puts "Namespace: #{namespace}"
+          puts '-' * (11 + namespace.name.size)
+          application.tasks[namespace].each do |task|
+            puts "task :#{task.task_name} # Without Description"
+          end
+        end
+      end
+
   end
 end
