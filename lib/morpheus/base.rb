@@ -1,6 +1,7 @@
 module Morpheus
   class Base
-    
+    include Shell
+
     # Create a Morpheus Task
     #
     # ==== Parameters
