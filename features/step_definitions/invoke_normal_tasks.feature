@@ -59,3 +59,31 @@ Feature: Invoke normal tasks
 
     """
   
+  Scenario: Invoking by namespace
+    Given a file named "Tasks" with:
+    """
+    class Tasks < Morpheus::Base
+      task :deploy do
+        say('Deploy')
+      end
+    end
+    class OtherTask < Morpheus::Base
+      task :deploy do
+        say('Deploy from OtherTask')
+      end
+    end
+    """
+    When I run `task tasks:deploy`
+    Then the stdout should contain exactly:
+    """
+    [namespace: Tasks]: invoke :deploy
+    Deploy
+
+    """
+    And the stdout should not contain:
+    """
+    [namespace: OtherTask]: invoke :deploy
+    """
+  
+  
+  

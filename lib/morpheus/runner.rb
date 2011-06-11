@@ -36,8 +36,15 @@ module Morpheus
     # Invoke the given namespace or class given. It adds an instance
     # method that will invoke the klass and task.
     #
+    # REFACTOR ME: I know thos code sucks but this is a little spike
+    #
     def invoke(task_name)
-      results = application.tasks.values.flatten.select { |task| task.task_name.equal?(task_name) }
+      if task_name.to_s.include?(':')
+        namespace, task_name = task_name.to_s.capitalize.split(':')
+        results = application.tasks[Object.const_get(namespace)].select { |task| task.task_name.equal?(task_name.to_sym) }
+      else
+        results = application.tasks.values.flatten.select { |task| task.task_name.equal?(task_name) }
+      end
       say("The task :#{task_name} appears in #{results.size} namespaces(#{results.collect(&:namespace).join(', ')})") if results.size > 1
       results.each do |task|
         say("[namespace: #{task.namespace}]: invoke :#{task_name}")
