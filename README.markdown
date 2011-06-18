@@ -83,7 +83,16 @@ Then you wanna know all the tasks:
 		  task :version:bump:patch  # Bump the patch version by 1
 
 
-Now imagine that you want create your own task:
+Create your own tasks
+---------------------
+
+
+<div style="padding:2px; border:1px solid silver; float:right; margin:0 0 1em 2em; background:white">
+  <img src="https://github.com/tomas-stefano/morpheus/raw/master/images/morph_neo.jpg" alt="Morpheus"  width:'350px' />
+</div>
+
+**Morpheus says: I imagine that right now, you're feeling a bit like Alice. Hmm? Tumbling down the rabbit hole?**
+
 
      :alice.tasks do # this is the same as: class AliceTasks < Morpheus::Base
         include_gem_tasks
@@ -102,13 +111,6 @@ Now imagine that you want create your own task:
 		end
      end
 
-<div style="padding:2px; border:1px solid silver; float:right; margin:0 0 1em 2em; background:white">
-  <img src="https://github.com/tomas-stefano/morpheus/raw/master/images/morph_neo.jpg" alt="Morpheus"  width:'350px' />
-</div>
-
-**Morpheus says: I imagine that right now, you're feeling a bit like Alice. Hmm? Tumbling down the rabbit hole?**
-
-
 Imagine now that you want to pass some options in the command line like that
 
     $ task wonderland --dont drink
@@ -117,7 +119,6 @@ Imagine now that you want to pass some options in the command line like that
        options :dont => :string
        task :wonderland do
          options # => { 'dont' => 'drink' }
-         say(options)
        end
       end
 
@@ -128,6 +129,8 @@ Imagine now that you want to create a simple generator:
          empty_directory 'app'
        end
      end
+
+**Obs.: This generators helpers methods(empty_directory, create_file, etc) are available in the tasks scope.**
 
 Run with:
 
@@ -149,7 +152,7 @@ There are other task gems that trying to do this, why you create this gem?
 * The answer: Why not?
 
 <div style="padding:2px; border:1px solid silver; float:right; margin:0 0 1em 2em; background:white">
-  <img src="https://github.com/tomas-stefano/morpheus/raw/master/images/there_are_no_spoon.png" alt="Morpheus" />
+  <img src="https://github.com/tomas-stefano/morpheus/raw/master/images/there_is_no_spoon.png" alt="Morpheus" />
 </div>
 
 **Morpheus says: Do not try and bend the spoon. That's impossible. Instead... only try to realize the truth ... There is no spoon.**
@@ -205,4 +208,7 @@ To know all just run:
 To know more about one specific helper method, just run:
 
       $ task man require_files
+
+And that will look for a manual in the manuals folder.
+
 
