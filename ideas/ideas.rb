@@ -1,22 +1,38 @@
 #!/usr/bin/env ruby
 
-:reblog.tasks do # This is the same as class ReblogTasks < Morpheus::Base; end
+:morpheus.tasks do # This is the same as class MorpheusTasks < Morpheus::Base; end
   rspec :spec, :format => :progress
   rspec :rspec,:format => :documentation
   backup :backup => :source, :with => :gzip
   rdoc :doc
-  
+
   task :do_something do
     puts options
   end
-  
+
   def do_other_thing(options)
     puts options
   end
 end
 
+# New idea
+#
+class CrudGenerator < Morpheus::Generator
+  options model: :string, controller: :string
+
+  def create_models
+    empty_directory 'app/models'
+    create_file options[:model]
+  end
+
+  def create_controllers
+    empty_directory 'app/controllers'
+    create_file options[:controller]
+  end
+end
+
 #!/usr/bin/env ruby
-:morpheus.tasks do # This is the same as class MorpheusTasks < Morpheus::Base; end
+:morpheus.tasks do # class MorpheusTasks < Morpheus::Base; end
   rspec :ruby_versions => %w(1.9.2 ree)
   rdoc  :title => 'Morpheus - Task Framework'
   rcov
@@ -32,11 +48,12 @@ class Task < Morpheus::Base
   backup   :backup_database, :database, :with => :zip
   backup   :backup_all, :all, :with => :gzip
   rdoc     :doc
-  
+  compile # need to think more about that
+
   task :do_something do
     puts options # task too!
   end
-  
+
   def do_other_thing(options)
     puts options # task too!
   end
@@ -55,8 +72,8 @@ end
 #
 class RSpecTask < Morpheus::TaskMethod
   method_name :rspec
-  
-  def call(options)
+
+  def run(options)
     puts options # => { :ruby_versions => '1.8.7,1.9.2', :format => :progress }
   end
 
@@ -64,8 +81,8 @@ end
 
 class RubyBinary < Morpheus::TaskMethod
   task_name :ruby
-  
-  def call(options)
+
+  def run(options)
     puts options # => { :load_path => %w(lib spec) }
   end
 end
@@ -75,7 +92,6 @@ class Task < Morpheus::Base
 end
 
 class OtherTask < Morpheus::Base
-  use_class_as_namespace! # Namespace
   rspec :spec, :format => :documentation
 end
 
