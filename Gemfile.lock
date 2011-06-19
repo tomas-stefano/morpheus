@@ -1,3 +1,13 @@
+GIT
+  remote: git@github.com:tomas-stefano/infinity_test.git
+  revision: 9eb9aff53eee758da7721f45bb580d1ba6f75bc5
+  specs:
+    infinity_test (1.0.3)
+      notifiers (= 1.1.0)
+      notifiers (>= 1.1.0)
+      watchr (= 0.7)
+      watchr (>= 0.7)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -18,9 +28,6 @@ GEM
     ffi (1.0.9)
     gherkin (2.4.0)
       json (>= 1.4.6)
-    infinity_test (1.0.2)
-      notifiers (>= 1.1.0)
-      watchr (>= 0.7)
     json (1.5.1)
     notifiers (1.1.0)
     rspec (2.6.0)
@@ -40,5 +47,5 @@ PLATFORMS
 DEPENDENCIES
   aruba (= 0.3.7)
   cucumber (= 0.10.6)
-  infinity_test (= 1.0.2)
+  infinity_test!
   rspec (= 2.6.0)

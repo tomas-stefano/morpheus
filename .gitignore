@@ -8,3 +8,4 @@ temporary
 tmp/*
 rerun.txt
 .bundle/*
+test/*

@@ -6,6 +6,8 @@ in a simple and elegant Domain Specific Language.
 
 The Morpheus gem is responsible to keep your tasks in order and more important -> <b>Simple</b> and <b>Clean</b>.
 
+**It is based on the Rake cool DSL and the robustness of Thor.**
+
 The Feature
 -----------
 
@@ -51,7 +53,9 @@ Let's Fun!
 
 **Morpheus says: Unfortunately, no one can be told what the gem is. You have to see it for yourself.**
 
-Imagine that do you wanna create a gem that had some tasks. Imagine that your gem name is <b>Alice</b>:
+Imagine that do you wanna create a gem that had some tasks. 
+Imagine that your gem name is <b>Alice</b>.
+Create a "Tasks" manifest file or a *.tasks file with:
 
      :alice.tasks do # this is the same as: class AliceTasks < Morpheus::Base
         include_gem_tasks
@@ -82,10 +86,8 @@ Then you wanna know all the tasks:
 		  task :version:bump:minor  # Bump the a minor version by 1
 		  task :version:bump:patch  # Bump the patch version by 1
 
-
 Create your own tasks
 ---------------------
-
 
 <div style="padding:2px; border:1px solid silver; float:right; margin:0 0 1em 2em; background:white">
   <img src="https://github.com/tomas-stefano/morpheus/raw/master/images/morph_neo.jpg" alt="Morpheus"  width:'350px' />
@@ -111,16 +113,53 @@ Create your own tasks
 		end
      end
 
-Imagine now that you want to pass some options in the command line like that
+Require Tasks
+-------------
+
+Imagine, if you have a folder with many tasks like the following:
+
+    my_project/
+    |
+    |_tasks/
+    |  |_ precious.tasks
+    |  |_ wonderland.tasks
+    |  |_ rabbit.tasks
+    |_Tasks
+
+If you wanna require all tasks from a folder:
+
+    require_tasks :from_dir => :tasks
+    
+    :alice.tasks do
+      ...
+    end
+
+If you don't wanna to require 'precious.tasks' from example:
+
+    require_tasks :from_dir => :tasks, :except => %w(precious.tasks)
+
+    :alice.tasks do
+       ...
+    end
+
+Options Parser
+--------------
+
+Imagine now that you want to pass some options in the command line like that:
 
     $ task wonderland --dont drink
 
+Just do this:
+
      :alice.tasks do
-       options :dont => :string
-       task :wonderland do
-         options # => { 'dont' => 'drink' }
-       end
+       options :dont => :string                # You can do this too:
+       task :wonderland do                     # def wonderland(options)
+         options # => { 'dont' => 'drink' }    #  options 
+       end                                     # end
       end
+
+Generator
+---------
 
 Imagine now that you want to create a simple generator:
 
@@ -136,6 +175,9 @@ Run with:
 
      $ task g alice
 
+Binaries
+--------
+
 Create a Robust Binary:
 
      :my_binary.binaries do # This is the same as class MyBinary < Morpheus::Binary
@@ -144,7 +186,27 @@ Create a Robust Binary:
 
      >> my_binary = MyBinary.new(['--format', 'documentation', '--color'])
      >> my_binary.options
-     { :format => :documentation, :color => true }
+     => { :format => :documentation, :color => true }
+
+Your own task method
+--------------------
+
+In order to create your own task method(like rspec, rdoc, yardoc, test_unit, etc ...), like this:
+
+    :alice.tasks do
+       my_task_method :format => :pretty
+    end
+
+You can do this:
+
+                                          # This is the same:
+    :my_task_method.task_method do        # class MyTaskMethod < Morpheus::TaskMethod
+                                          #   task_method :my_task_method
+
+	   task :run do                       #   def run(options)
+		 options # => { format: :pretty}  #     options  # => { format: :pretty }
+	   end                                #   end
+     end                                  # end
 
 There are other task gems that trying to do this, why you create this gem?
 --------------------------------------------------------------------------
@@ -155,7 +217,7 @@ There are other task gems that trying to do this, why you create this gem?
   <img src="https://github.com/tomas-stefano/morpheus/raw/master/images/there_is_no_spoon.png" alt="Morpheus" />
 </div>
 
-**Morpheus says: Do not try and bend the spoon. That's impossible. Instead... only try to realize the truth ... There is no spoon.**
+**Do not try and bend the spoon. That's impossible. Instead... only try to realize the truth ... There is no spoon.**
 
 There are many helpers methods in Morpheus gem.
 To know all just run:
@@ -187,10 +249,11 @@ To know all just run:
 
         Shell Helpers
         -------------
-          * run_without_aborting
+          * ask
           * git
           * say
           * run
+          * run_without_aborting
           * ruby
 
 		System Helpers
