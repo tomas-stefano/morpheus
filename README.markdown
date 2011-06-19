@@ -54,8 +54,10 @@ Let's Fun!
 **Morpheus says: Unfortunately, no one can be told what the gem is. You have to see it for yourself.**
 
 Imagine that do you wanna create a gem that had some tasks. 
-Imagine that your gem name is <b>Alice</b>.
-Create a "Tasks" manifest file or a *.tasks file with:
+
+**Imagine that your gem name is Alice.**
+
+Create a **"Tasks"** manifest file or a **'*.tasks'** file with:
 
      :alice.tasks do # this is the same as: class AliceTasks < Morpheus::Base
         include_gem_tasks
@@ -95,7 +97,6 @@ Create your own tasks
 
 **Morpheus says: I imagine that right now, you're feeling a bit like Alice. Hmm? Tumbling down the rabbit hole?**
 
-
      :alice.tasks do # this is the same as: class AliceTasks < Morpheus::Base
         include_gem_tasks
         rspec :format => :documentation
@@ -103,11 +104,15 @@ Create your own tasks
         backup :source, :with => :gzip
         clobber :remove => %w(doc pkg tmp coverage)
 	 	stats
-         
+        
+        # This is a description of the task
+        #
         task :this_is_a_task! do
           'This is a task'
         end
 
+		# This is a decription of the task
+		# 
 		def this_is_a_task_too!
 		  "#{this_is_a_task} too!" # This is how invoke a task! Just call a method!
 		end
@@ -124,9 +129,11 @@ Imagine, if you have a folder with many tasks like the following:
     |  |_ precious.tasks
     |  |_ wonderland.tasks
     |  |_ rabbit.tasks
+    |_other_tasks/
+    |  |_ not_so_important.tasks
     |_Tasks
 
-If you wanna require all tasks from a folder:
+If you wanna require all tasks from task folder:
 
     require_tasks :from_dir => :tasks
     
@@ -134,13 +141,21 @@ If you wanna require all tasks from a folder:
       ...
     end
 
-If you don't wanna to require 'precious.tasks' from example:
+If you don't wanna to require 'precious.tasks' from tasks folder, from example:
 
     require_tasks :from_dir => :tasks, :except => %w(precious.tasks)
 
     :alice.tasks do
        ...
     end
+
+If you wanna require more than one dir just:
+
+
+     require_tasks :from_dir => [:tasks, :other_tasks]
+     :alice.tasks do
+       ...
+     end
 
 Options Parser
 --------------
