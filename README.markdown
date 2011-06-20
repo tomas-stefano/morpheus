@@ -247,6 +247,7 @@ To know all just run:
         Base Helpers
         ------------
 		  * arguments
+		  * abort
           * backup
           * clobber
 		  * console
