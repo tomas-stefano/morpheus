@@ -3,22 +3,41 @@ Feature: Morpheus Options Parser
   As a user
   I want to pass the options via command line
 
-  # Scenario: Pass a String in the Options Parser
-  #   Given a file named "Tasks" with:
-  #   """
-  #   :alice.tasks do
-  #     options :dont => :string
-  # 
-  #     task :forbidden do
-  #       say(options)
-  #     end
-  #   end
-  #   """
-  #   When I run `task forbidden --dont drink`
-  #   Then the stdout should contain exactly:
-  #   """
-  #   [namespace: Alice]: invoke :forbidden
-  #   {:dont=>:drink}
-  # 
-  #   """
-  # 
+  Scenario: Pass a String in the Options Parser
+	Given a file named "Tasks" with:
+    """
+    :alice.tasks do
+      options :dont => :string
+  
+      task :forbidden do
+        say(options)
+      end
+    end
+    """
+    When I run `task forbidden --dont drink`
+    Then the stdout should contain exactly:
+    """
+    [namespace: AliceTasks]: invoke :forbidden
+    {:dont=>:drink}
+
+    """
+
+  Scenario: Pass a string in options parser using a normal ruby method
+    Given a file named "Tasks" with:
+    """
+	class AliceTasks < Morpheus::Base
+	  options :dont => :string
+	
+	  def forbidden(options)
+	    say(options)
+	  end
+	end
+    """
+    When I run `task forbidden --dont drink`
+    Then the stdout should contain exactly:
+	"""
+    [namespace: AliceTasks]: invoke :forbidden
+    {:dont=>:drink}
+
+    """  
+  

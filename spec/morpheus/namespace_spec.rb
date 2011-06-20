@@ -11,7 +11,7 @@ module Morpheus
       it 'should tranform the namespace in a class' do
         namespace = Namespace.new(:alice, &@block)
         expect {
-          namespace.namespace.should equal Alice
+          namespace.namespace.should equal AliceTasks
         }.to_not raise_exception
       end
 
@@ -28,7 +28,7 @@ module Morpheus
       it "should camel case the namespace" do
         namespace = Namespace.new(:wonder_land, &@block)
         expect {
-          namespace.namespace.should equal WonderLand
+          namespace.namespace.should equal WonderLandTasks
         }.to_not raise_exception
       end
 

@@ -9,7 +9,11 @@ module Morpheus
     end
 
     def create_class!(base_class)
-      Object.const_set(camelize(@symbol_namespace), Class.new(base_class))
+      Object.const_set(camelize(class_name), Class.new(base_class))
+    end
+
+    def class_name
+      "#{@symbol_namespace}_tasks"
     end
 
     def camelize(symbol)
