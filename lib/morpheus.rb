@@ -1,6 +1,9 @@
+require 'morpheus/dsl'
+
 module Morpheus
   autoload 'Application', 'morpheus/application'
   autoload 'Base', 'morpheus/base'
+  autoload 'Namespace', 'morpheus/namespace'
   autoload 'Runner', 'morpheus/runner'
   autoload 'Shell', 'morpheus/shell'
   autoload 'Task', 'morpheus/task'
@@ -15,13 +18,5 @@ module Morpheus
 
   def self.application
     @application ||= Application.new
-  end
-end
-
-# FIXME: Fix this ugly monkey patch
-#
-class Symbol
-  def tasks
-
   end
 end
