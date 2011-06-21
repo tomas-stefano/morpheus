@@ -18,7 +18,7 @@ Feature: Morpheus Options Parser
     Then the stdout should contain exactly:
     """
     [namespace: AliceTasks]: invoke :forbidden
-    {:dont=>:drink}
+    {"dont"=>"drink"}
 
     """
 
@@ -28,7 +28,7 @@ Feature: Morpheus Options Parser
 	class AliceTasks < Morpheus::Base
 	  options :dont => :string
 	
-	  def forbidden(options)
+	  def forbidden
 	    say(options)
 	  end
 	end
@@ -36,8 +36,26 @@ Feature: Morpheus Options Parser
     When I run `task forbidden --dont drink`
     Then the stdout should contain exactly:
 	"""
-    [namespace: AliceTasks]: invoke :forbidden
-    {:dont=>:drink}
+	[namespace: AliceTasks]: invoke :forbidden
+	{"dont"=>"drink"}
 
     """  
   
+  Scenario: Pass a boolean and return false when is not passed in the Options Parser
+	Given a file named "Tasks" with:
+    """
+    :alice.tasks do
+      options :list => :string, :okay => :boolean
+
+      task :forbidden do
+        say(options)
+      end
+    end
+    """
+    When I run `task forbidden --list helpers`
+    Then the stdout should contain exactly:
+    """
+    [namespace: AliceTasks]: invoke :forbidden
+    {"list"=>"helpers", "okay" => false}
+
+    """

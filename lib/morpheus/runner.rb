@@ -48,7 +48,16 @@ module Morpheus
       say("The task :#{task_name} appears in #{results.size} namespaces(#{results.collect(&:namespace).join(', ')})") if results.size > 1
       results.each do |task|
         say("[namespace: #{task.namespace}]: invoke :#{task_name}")
-        task.block.call
+
+        # If a task has a block call the block
+        # else
+        #   just a invoke a method
+        # end
+        if task.block
+          task.namespace.new.instance_eval(&task.block)
+        else
+          task.namespace.new.send(task.task_name)
+        end
       end
       say("Could not find the task :#{task_name} in any namespace available.") if results.empty?
     end
