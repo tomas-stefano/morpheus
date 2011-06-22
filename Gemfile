@@ -7,3 +7,7 @@ group :test do
   gem 'cucumber', '0.10.7'
   gem 'aruba', '0.3.7'
 end
+
+platform :mri_19 do
+  gem 'ruby-debug19', require: false
+end

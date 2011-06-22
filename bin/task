@@ -25,4 +25,4 @@ morpheus_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(morpheus_dir) unless $LOAD_PATH.include?(morpheus_dir)
 
 require 'morpheus'
-Morpheus.run!
+Morpheus::Application.run!

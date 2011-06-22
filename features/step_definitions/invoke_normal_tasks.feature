@@ -33,7 +33,7 @@ Feature: Invoke normal tasks
 
     """
 
-  Scenario: Invoke this two tasks that exists in two namespaces and warn user
+  Scenario: Invoke the first task that exists in two namespaces and warn user
     Given a file named "Tasks" with:
     """
     class Tasks < Morpheus::Base
@@ -54,8 +54,6 @@ Feature: Invoke normal tasks
     The task :exist_in_two_namespaces appears in 2 namespaces(Tasks, OtherTasks)
     [namespace: Tasks]: invoke :exist_in_two_namespaces
     from Tasks
-    [namespace: OtherTasks]: invoke :exist_in_two_namespaces
-    from Other Tasks
 
     """
   

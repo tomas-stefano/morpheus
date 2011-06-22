@@ -56,6 +56,25 @@ Feature: Morpheus Options Parser
     Then the stdout should contain exactly:
     """
     [namespace: AliceTasks]: invoke :forbidden
-    {"list"=>"helpers", "okay" => false}
+    {"list"=>"helpers"}
+
+    """
+
+  Scenario: Dont run when not pass required options
+	Given a file named "Tasks" with:
+    """
+    :alice.tasks do
+      options :list => {type: :string, required: true}, :okay => :boolean
+
+      task :forbidden do
+        say(options)
+      end
+    end
+    """
+    When I run `task forbidden`
+    Then the stdout should contain exactly:
+    """
+    [namespace: Alice]: invoke :forbidden
+    '--list' is a required option.
 
     """

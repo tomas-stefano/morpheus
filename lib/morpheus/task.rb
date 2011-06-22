@@ -6,7 +6,7 @@ module Morpheus
       @namespace = options[:namespace]
       @task_name = options[:task_name]
       @block     = action
-      Morpheus.application.add_task(self)
+      Morpheus.application.add_task self, :to_namespace => namespace
     end
   end
 end

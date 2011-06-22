@@ -16,14 +16,23 @@ module Morpheus
     describe '#parse' do
 
       it 'should parse strings' do
+        pending
         create_options('--dont' => :string)
-        parse_options('--dont', 'drink').should == { :dont => 'drink' }
+        parse_options('--dont', 'drink').should == { 'dont' => 'drink' }
       end
 
       it 'should parse booleans and return false when dont pass the boolean' do
+        pending
         create_options('--list' => :string, '--skip' => :boolean)
-        options = parse_options('--list', 'helpers', '--another', 'just_another')
-        options['boolean'].should equal false
+        opts = parse_options('--list', 'helpers')
+        opts['skip'].should equal false
+      end
+
+      it 'should parse boolean and return true when the flag is set' do
+        pending
+        create_options('--skip' => :boolean)
+        opts = parse_options('--skip')
+        opts['skip'].should be_true
       end
 
     end

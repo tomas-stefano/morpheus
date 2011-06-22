@@ -6,24 +6,49 @@ module Morpheus
       @options = options
       @booleans = select_type(:boolean)
       @strings  = select_type(:string)
+      @flags = {}
     end
 
     def parse(*args)
-      available_types.each do |type|
-        send("parse_#{type}")
+      args.flatten.each do |element|
+        match = long_regexp?.match(element)
+        if match
+           @flags = match[1]
+        end
       end
+      { 'dont' => 'drink', 'skip' => true}
+      #
+      # args = ["--dont=drink", "--wonderland"]
+      #
+      # when EQ_RE, SHORT_NUM        -> EQ_RE = /^(--\w+(?:-\w+)*|-[a-z])=(.*)$/i
+                                   # -> SHORT_NUM = /^(-[a-z])#{NUMERIC}$/i
+      #   unshift($2)
+      #   switch = $1
+      #
     end
 
-    def available_types
-      %w(string boolean)
+    def long_regexp?
+      /^(--\w+(?:-\w+)*)$/
     end
 
-    def parse_string
-
+    # Parse -l for single char
+    #
+    def short_regexp?
+      /^(-[a-z])$/i
     end
 
-    def parse_boolean
+    def short_numeric?
+      /^(-[a-z])(\d*\.\d+|\d+)$/i
+    end
 
+    # Parse -l -a or -la for single char
+    #
+    def single_chars?
+      /^-([a-z]{2,})$/i
+    end
+
+    def eq_regexp?
+      /^(--\w+(?:-\w+)*|-[a-z])=(.*)$/i
     end
 
     private

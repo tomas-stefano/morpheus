@@ -8,9 +8,12 @@ module Morpheus
       #
       def inherited(klass)
         subclasses.push(klass)
+        Namespace.new(:class_name => klass)
       end
 
       # Every method in the scope of a Base subclass is a task
+      #
+      # TODO: Do something wib children of subclasses of Morpheus::Base
       #
       def method_added(method_name)
         if self.superclass.equal?(Morpheus::Base)
