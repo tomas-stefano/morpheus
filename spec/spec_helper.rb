@@ -2,14 +2,15 @@ require 'bundler'
 require 'morpheus'
 require 'rspec'
 
-Dir['spec/matchers/*'].each { |file| require File.expand_path(file) }
-
 # Load fixtures
 #
 fixtures_folder = File.join(File.dirname(__FILE__), 'fixtures')
 Dir["#{fixtures_folder}/*.tasks"].each { |file| load file }
 
 RSpec.configure do |config|
+  include Morpheus::Matchers
+
+  # config.use_morpheus_matchers!
 
   def create_options(options)
     @options = Morpheus::OptionsParser.new(options)
@@ -30,4 +31,13 @@ RSpec.configure do |config|
   def default_namespace
     DefaultTasks
   end
+
+  def fail_with(message)
+    raise_error(RSpec::Expectations::ExpectationNotMetError, message)
+  end
+
+  def fail_spec
+    raise_error(RSpec::Expectations::ExpectationNotMetError)
+  end
+
 end
