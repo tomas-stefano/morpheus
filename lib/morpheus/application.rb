@@ -87,7 +87,7 @@ module Morpheus
     end
 
     def dont_have_tasks?
-      namespaces.collect { |namespace| namespace.tasks }.flatten.empty?
+      tasks.empty?
     end
 
   end

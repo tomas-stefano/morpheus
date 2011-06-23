@@ -23,6 +23,10 @@ RSpec.configure do |config|
     Morpheus::Task.new(task_name, :namespace => DefaultTasks)
   end
 
+  def application
+    Morpheus.application
+  end
+
   def default_namespace
     DefaultTasks
   end
