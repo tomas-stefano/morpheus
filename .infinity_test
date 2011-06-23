@@ -2,5 +2,8 @@
 
 infinity_test do
   use :test_framework => :rspec
+  before(:all) do
+    clear :terminal
+  end
 end
 
