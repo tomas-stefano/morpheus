@@ -18,6 +18,7 @@ The purposes of the project are:
 - Make the code of creating tasks, more cleaner.
 - Making people to write the smallest possible number of code to create tasks that exist in the Ruby community.
 - Create conventions of writing tasks (remember - Convention Over Configuration)
+- Create a very easy way to test task very easily 
 
 RELEASE
 =======
