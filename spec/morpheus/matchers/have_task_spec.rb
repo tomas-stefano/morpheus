@@ -7,6 +7,16 @@ describe "should have_task(expected_task_name)" do
       [new_task(:example)].should have_task(:example)
     end
 
+    it 'passes if target haves expected task name and expected namespace' do
+      [new_task(:example)].should have_task(:example).from_namespace(default_namespace)
+    end
+
+    it 'fails if target have expected task name but does not have the expected namespace' do
+      lambda {
+        [new_task(:example, TaskExample)].should have_task(:example).from_namespace(default_namespace)
+      }.should fail_spec
+    end
+
     it "fails if target does not have expected" do
       lambda {
         [new_task(:other)].should have_task(:dont_exist)
@@ -34,6 +44,16 @@ describe "should_not have_task(expected_task_name)" do
     it "fails if target haves expected" do
       lambda {
         [new_task(:date)].should_not have_task(:date)
+      }.should fail_spec
+    end
+
+    it 'passes if target have the task name but does not have the expected namespace' do
+      [new_task(:example)].should_not have_task(:example).from_namespace(TaskExample)
+    end
+
+    it 'fails if target have expected task name but does not have the expected namespace' do
+      lambda {
+        [new_task(:example, TaskExample)].should_not have_task(:example).from_namespace(TaskExample)
       }.should fail_spec
     end
 

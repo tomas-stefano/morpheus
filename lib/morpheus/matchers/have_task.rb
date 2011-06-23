@@ -18,10 +18,19 @@ module Morpheus
     def have_task(expected, task_class=Morpheus::Task)
       Matcher.new :have_task, expected do |_expected|
 
+        chain :from_namespace do |namespace|
+          @namespace = namespace
+        end
+
         match do |actual|
           actual.all? do |task|
             task.should be_instance_of(task_class)
-            task.name == _expected
+            expression = if @namespace
+              task.namespace == @namespace
+            else
+              true
+            end
+            task.name == _expected && expression
           end
         end
 
