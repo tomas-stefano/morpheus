@@ -16,9 +16,9 @@ module Morpheus
       end
     end
 
-    def run!
+    def run!(args=ARGV)
       load_task_file
-      argument = ARGV.shift.to_sym
+      argument = args.shift.to_sym
       begin
         send(argument)
       rescue
@@ -57,6 +57,10 @@ module Morpheus
       find_task(task_name)
     end
 
+    def tasks
+      namespaces.collect { |namespace| namespace.tasks }.flatten
+    end
+
     def add_namespace(namespace)
       namespaces.push(namespace)
     end
@@ -71,11 +75,20 @@ module Morpheus
     end
 
     def find_task(task_name)
-
+      tasks = FindTask.where(:task_name => task_name)
+      say("The task :#{task_name} appears in 2 namespaces(#{tasks.collect(&:namespace).join(', ')})") if tasks.size > 1
+      task = tasks.shift
+      if task
+        say("[namespace: #{task.namespace}]: invoke :#{task.task_name}")
+        task.block.call
+      else
+        say("Could not find the task '#{task_name}' in any namespace available.\n")
+      end
     end
 
     def dont_have_tasks?
       namespaces.collect { |namespace| namespace.tasks }.flatten.empty?
     end
+
   end
 end

@@ -2,6 +2,7 @@ require 'spec_helper'
 
 module Morpheus
   describe Application do
+    let(:application) { subject }
     describe '#namespaces' do
       before do
         subject.add_namespace(Namespace.new(:wonderland))
@@ -34,9 +35,18 @@ module Morpheus
 
       it 'should return true when have tasks' do
         namespace = Namespace.new(:alice)
-        namespace.tasks.push(1)
+        namespace.should_receive(:tasks).and_return([5, 1,2,3,4])
         subject.should_receive(:namespaces).and_return([namespace])
         subject.dont_have_tasks?.should be_false
+      end
+    end
+
+    describe '#tasks' do
+      it 'should return all the tasks in all namespaces' do
+        namespace = Namespace.new(:class_name => default_namespace)
+        application.should_receive(:namespaces).and_return([namespace])
+        new_task(:my_task)
+        application.tasks.should have_task(:my_task)
       end
     end
 

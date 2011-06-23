@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+class DefaultTasks < Morpheus::Base
+  task :default do
+    :default
+  end
+end

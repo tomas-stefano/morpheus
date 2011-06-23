@@ -2,12 +2,5 @@
 
 infinity_test do
   use :test_framework => :rspec
-  skip_bundler!
-
-  after(:all) do
-    puts
-    puts("Running with Cucumber")
-    system('cucumber --format progress')
-  end
 end
 

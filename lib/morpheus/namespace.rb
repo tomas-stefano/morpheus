@@ -41,14 +41,27 @@ module Morpheus
     end
 
     def create_class!
+      return the_klass_name if klass_exist?
       Object.const_set(klass_name, Class.new(base_class))
+    end
+
+    def klass_exist?
+      begin
+        the_klass_name
+      rescue NameError
+        false
+      end
+    end
+
+    def the_klass_name
+      Object.const_get(klass_name)
     end
 
     def klass_name
       if @symbol_namespace.to_s.include?('tasks')
-        camelize("#{@symbol_namespace}")
+        self.class.camelize("#{@symbol_namespace}")
       else
-        camelize("#{@symbol_namespace}_tasks")
+        self.class.camelize("#{@symbol_namespace}_tasks")
       end
     end
 
@@ -56,7 +69,7 @@ module Morpheus
       Morpheus::Base
     end
 
-    def camelize(symbol)
+    def self.camelize(symbol)
       symbol.to_s.gsub(/(?:^|_)(.)/) { $1.upcase }
     end
 

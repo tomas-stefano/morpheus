@@ -8,10 +8,6 @@ module Morpheus
         @block = Proc.new { 'a' }
       end
 
-      after(:all) do
-        Morpheus.application.namespaces.clear
-      end
-
       describe '#initialize' do
         context 'when it pass a class' do
           let(:namespace) { Namespace.new(:class_name => NamespaceHelperTest) }
@@ -30,10 +26,12 @@ module Morpheus
           let(:namespace) { namespace = Namespace.new(:alice, &@block) }
 
           it 'should tranform the namespace in a class' do
+            namespace = Namespace.new(:alice, &@block)
             namespace.klass.should equal AliceTasks
           end
 
           it 'should keep the block' do
+            namespace = Namespace.new(:alice, &@block)
             namespace.block.should equal @block
           end
 
@@ -79,8 +77,8 @@ module Morpheus
         end
 
         it 'should be possible to push things to tasks' do
-          namespace.tasks.push(1)
-          namespace.tasks.should == [1]
+          namespace.tasks.push(new_task(:abc))
+          namespace.tasks.should have_task(:abc)
         end
       end
 

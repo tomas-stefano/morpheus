@@ -29,7 +29,7 @@ Feature: Invoke normal tasks
     When I run `task example`
     Then the stdout should contain exactly:
     """
-	Could not find the task :example in any namespace available.
+	Could not find the task 'example' in any namespace available.
 
     """
 
@@ -57,6 +57,7 @@ Feature: Invoke normal tasks
 
     """
   
+  @announce
   Scenario: Invoking by namespace
     Given a file named "Tasks" with:
     """

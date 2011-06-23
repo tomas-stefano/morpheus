@@ -2,9 +2,12 @@ require 'bundler'
 require 'morpheus'
 require 'rspec'
 
+Dir['spec/matchers/*'].each { |file| require File.expand_path(file) }
+
 # Load fixtures
 #
-load File.join(File.dirname(__FILE__), 'fixtures', 'task_example.tasks')
+fixtures_folder = File.join(File.dirname(__FILE__), 'fixtures')
+Dir["#{fixtures_folder}/*.tasks"].each { |file| load file }
 
 RSpec.configure do |config|
 
@@ -14,5 +17,13 @@ RSpec.configure do |config|
 
   def parse_options(*arguments)
     @options.parse(arguments.flatten)
+  end
+
+  def new_task(task_name)
+    Morpheus::Task.new(:task_name => task_name, :namespace => DefaultTasks)
+  end
+
+  def default_namespace
+    DefaultTasks
   end
 end
