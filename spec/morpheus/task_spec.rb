@@ -13,7 +13,7 @@ module Morpheus
         task = new_task :example do
           :example
         end
-        task.task_name.should equal :example
+        task.name.should equal :example
       end
 
       it 'should keep the block of the task' do
@@ -34,7 +34,7 @@ module Morpheus
     end
 
     def new_task(task_name, klass = DefaultNamespace, &block)
-      Task.new(namespace: klass, task_name: task_name, &block)
+      Task.new(task_name, namespace: klass, &block)
     end
 
   end

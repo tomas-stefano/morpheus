@@ -20,7 +20,7 @@ RSpec.configure do |config|
   end
 
   def new_task(task_name)
-    Morpheus::Task.new(:task_name => task_name, :namespace => DefaultTasks)
+    Morpheus::Task.new(task_name, :namespace => DefaultTasks)
   end
 
   def default_namespace

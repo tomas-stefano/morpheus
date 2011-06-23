@@ -13,7 +13,7 @@ module Morpheus
 
       # Every method in the scope of a Base subclass is a task
       #
-      # TODO: Do something wib children of subclasses of Morpheus::Base
+      # TODO: Do something with children of subclasses of Morpheus::Base
       #
       def method_added(method_name)
         if self.superclass.equal?(Morpheus::Base)
@@ -44,7 +44,7 @@ module Morpheus
       #   end
       #
       def task(task_name, &block)
-        Morpheus::Task.new(namespace: self, task_name: task_name, &block)
+        Morpheus::Task.new(task_name, namespace: self, &block)
       end
 
       # Adds an option to the set of class options

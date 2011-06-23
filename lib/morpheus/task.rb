@@ -1,10 +1,10 @@
 module Morpheus
   class Task
-    attr_accessor :namespace, :task_name, :block
+    attr_accessor :namespace, :name, :block
 
-    def initialize(options, &action)
+    def initialize(task_name, options, &action)
+      @name = task_name
       @namespace = options[:namespace]
-      @task_name = options[:task_name]
       @block     = action
       Morpheus.application.add_task self, :to_namespace => namespace
     end

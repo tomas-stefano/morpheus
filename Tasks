@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-:morpheus.tasks do # This is the same as class MorpheusTasks < Morpheus::Base; end
+class Tasks < Morpheus::Base
   # rspec ruby_versions: %w(1.9.2 ree)
   # rdoc  title: 'Morpheus - Task Framework'
   # rcov

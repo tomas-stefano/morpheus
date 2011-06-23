@@ -44,7 +44,7 @@ module Morpheus
           say("Namespace: #{namespace.klass}")
           say('-' * (11 + namespace.klass.to_s.size))
           namespace.tasks.each do |task|
-            say("task :#{task.task_name} # Without Description")
+            say("task :#{task.name} # Without Description")
           end
         end
       end
@@ -79,7 +79,7 @@ module Morpheus
       say("The task :#{task_name} appears in 2 namespaces(#{tasks.collect(&:namespace).join(', ')})") if tasks.size > 1
       task = tasks.shift
       if task
-        say("[namespace: #{task.namespace}]: invoke :#{task.task_name}")
+        say("[namespace: #{task.namespace}]: invoke :#{task.name}")
         task.block.call
       else
         say("Could not find the task '#{task_name}' in any namespace available.\n")
