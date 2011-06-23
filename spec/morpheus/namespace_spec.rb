@@ -78,7 +78,7 @@ module Morpheus
 
         it 'should be possible to push things to tasks' do
           namespace.tasks.push(new_task(:abc))
-          namespace.tasks.should include_task(:abc)
+          namespace.tasks.should have_task(:abc)
         end
       end
 

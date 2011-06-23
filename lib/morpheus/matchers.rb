@@ -1,4 +1,4 @@
-['include_task'].each do |file|
+['include_task', 'have_task'].each do |file|
   require "morpheus/matchers/#{file}"
 end
 

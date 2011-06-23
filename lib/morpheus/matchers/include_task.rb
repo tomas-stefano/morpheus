@@ -19,11 +19,7 @@ module Morpheus
       Matcher.new :include_task, *expected do |*_expected|
         diffable
         match do |actual|
-          perform_match(:all?, actual, _expected)
-        end
-
-        def perform_match(predicate, actual, _expected)
-          _expected.send(predicate) do |expected|
+          _expected.all? do |expected|
             actual.collect { |task| task.name.to_sym }.include?(expected)
           end
         end

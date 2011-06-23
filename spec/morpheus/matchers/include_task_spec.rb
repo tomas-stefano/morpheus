@@ -12,6 +12,7 @@ describe "should include_task(expected_task_name)" do
         [new_task(:other)].should include_task(:dont_exist)
       }.should fail_spec
     end
+
   end
 
   context "for an array target" do
