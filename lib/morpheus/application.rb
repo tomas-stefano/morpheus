@@ -40,12 +40,7 @@ module Morpheus
         exit(1)
       else
         namespaces.each_with_index do |namespace, index|
-          say('') if index > 0
-          say("Namespace: #{namespace.klass}")
-          say('-' * (11 + namespace.klass.to_s.size))
-          namespace.tasks.each do |task|
-            say("task :#{task.name} # Without Description")
-          end
+          print_information(:about => namespace, :with => index)
         end
       end
     end
@@ -90,5 +85,16 @@ module Morpheus
       tasks.empty?
     end
 
+    private
+      def print_information(hash_options)
+        namespace = hash_options[:about]
+        index = hash_options[:with]
+        say('') if index > 0
+        say("Namespace: #{namespace.klass}")
+        say('-' * (11 + namespace.klass.to_s.size))
+        namespace.tasks.each do |task|
+          say("task :#{task.name} # Without Description")
+        end
+      end
   end
 end
