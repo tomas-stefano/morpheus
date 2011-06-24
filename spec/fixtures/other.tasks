@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+class OtherTasks < Morpheus::Base
+  def other_method
+    'The result of the other method'
+  end
+end
+

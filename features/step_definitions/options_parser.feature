@@ -3,6 +3,7 @@ Feature: Morpheus Options Parser
   As a user
   I want to pass the options via command line
 
+  @announce
   Scenario: Pass a String in the Options Parser
 	Given a file named "Tasks" with:
     """

@@ -20,8 +20,13 @@ RSpec.configure do |config|
     @options.parse(arguments.flatten)
   end
 
-  def new_task(task_name, namespace=default_namespace)
-    Morpheus::Task.new(task_name, :namespace => namespace)
+  def new_task(task_name, namespace=default_namespace, hash_options={}, &block)
+    hash_options = { :namespace => namespace, :using_method? => false}.merge(hash_options)
+    Morpheus::Task.new(task_name, hash_options, &block)
+  end
+
+  def find_task(task_name)
+    application.find_task(task_name).shift
   end
 
   def application

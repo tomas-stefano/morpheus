@@ -17,7 +17,7 @@ module Morpheus
       #
       def method_added(method_name)
         if self.superclass.equal?(Morpheus::Base)
-          Morpheus::Task.new(namespace: self, task_name: method_name)
+          Morpheus::Task.new(method_name, namespace: self, :is_a_method? => true)
         end
       end
 

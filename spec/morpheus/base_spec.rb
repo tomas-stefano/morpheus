@@ -3,16 +3,10 @@ require 'spec_helper'
 module Morpheus
   describe Base do
 
-    class MyTasks < Morpheus::Base
-    end
-
-    class OtherTasks < Morpheus::Base
-    end
-
     describe '.subclasses' do
 
       it 'should include the subclass' do
-        Base.subclasses.should include(MyTasks, OtherTasks)
+        Base.subclasses.should include(AppTasks, OtherTasks)
       end
 
       it 'should keep all the subclasses' do
@@ -24,6 +18,5 @@ module Morpheus
       end
 
     end
-
   end
 end

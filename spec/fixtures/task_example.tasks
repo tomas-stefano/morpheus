@@ -3,4 +3,6 @@ class TaskExample < Morpheus::Base
   task :example do
     :example
   end
+
+  task :task_without_a_block
 end

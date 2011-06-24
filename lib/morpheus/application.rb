@@ -49,7 +49,18 @@ module Morpheus
     # method that will invoke the klass and task.
     #
     def invoke(task_name)
-      find_task(task_name)
+      results = find_task(task_name)
+      say("The task :#{task_name} appears in 2 namespaces(#{results.collect(&:namespace).join(', ')})") if results.size > 1
+      if(task = results.shift)
+        say("[namespace: #{task.namespace}]: invoke :#{task.name}")
+        task.invoke
+      else
+        say("Could not find the task '#{task_name}' in any namespace available.\n")
+      end
+    end
+
+    def find_task(task_name)
+      FindTask.where(:task_name => task_name)
     end
 
     def tasks
@@ -69,20 +80,12 @@ module Morpheus
       namespaces.find { |name| name.klass == namespace }
     end
 
-    def find_task(task_name)
-      tasks = FindTask.where(:task_name => task_name)
-      say("The task :#{task_name} appears in 2 namespaces(#{tasks.collect(&:namespace).join(', ')})") if tasks.size > 1
-      task = tasks.shift
-      if task
-        say("[namespace: #{task.namespace}]: invoke :#{task.name}")
-        task.block.call
-      else
-        say("Could not find the task '#{task_name}' in any namespace available.\n")
-      end
-    end
-
     def dont_have_tasks?
       tasks.empty?
+    end
+
+    def task_without_a_block!
+      say('(skipped) => task without a block')
     end
 
     private

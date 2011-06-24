@@ -57,7 +57,6 @@ Feature: Invoke normal tasks
 
     """
   
-  @announce
   Scenario: Invoking by namespace
     Given a file named "Tasks" with:
     """
@@ -84,5 +83,35 @@ Feature: Invoke normal tasks
     [namespace: OtherTask]: invoke :deploy
     """
   
+
+  Scenario: Invoke task by a method
+    Given a file named "Tasks" with:
+    """
+    class Tasks < Morpheus::Base
+      def just_list_all
+        say('Just listing')
+      end
+    end
+    """
+    When I run `task just_list_all`
+    Then the stdout should contain exactly:
+    """
+	[namespace: Tasks]: invoke :just_list_all
+	Just listing
+
+    """
   
-  
+  Scenario: Invoke task without a block and do nothing
+    Given a file named "Tasks" with:
+    """
+    class Tasks < Morpheus::Base
+      task :just_list_all
+    end
+    """
+    When I run `task just_list_all`
+    Then the stdout should contain exactly:
+    """
+	[namespace: Tasks]: invoke :just_list_all
+	(skipped) => task without a block
+
+    """  
