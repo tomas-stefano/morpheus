@@ -23,6 +23,7 @@ module Morpheus
         end
 
         match do |actual|
+          actual.should_not be_empty
           actual.all? do |task|
             task.should be_instance_of(task_class)
             expression = if @namespace

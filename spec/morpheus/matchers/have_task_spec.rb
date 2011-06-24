@@ -17,6 +17,18 @@ describe "should have_task(expected_task_name)" do
       }.should fail_spec
     end
 
+    it 'fails if target is empty but the expected does not' do
+      lambda {
+        [].should have_task(:example)
+      }.should fail_spec
+    end
+
+    it 'fails if target is empty but the expected does not and with namespace' do
+      lambda {
+        [].should have_task(:example).from_namespace(default_namespace)
+      }.should fail_spec
+    end
+
     it "fails if target does not have expected" do
       lambda {
         [new_task(:other)].should have_task(:dont_exist)

@@ -73,5 +73,13 @@ module Morpheus
       symbol.to_s.gsub(/(?:^|_)(.)/) { $1.upcase }
     end
 
+    def self.class_for(namespace)
+      begin
+        Object.const_get(camelize(namespace))
+      rescue
+        nil
+      end
+    end
+
   end
 end
