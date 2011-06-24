@@ -53,13 +53,17 @@ module Morpheus
       # options<Hash>:: Described below.
       #
       def options(user_options)
-        Morpheus::OptionsParser.new(user_options)
+        @options = Morpheus::OptionsParser.new(user_options)
+      end
+
+      def command_line_options
+        @options
       end
 
     end
 
     def options
-      { "dont" => "drink" }
+      self.class.command_line_options
     end
   end
 end

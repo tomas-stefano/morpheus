@@ -1,5 +1,5 @@
 module Morpheus
-  class OptionsParser
+  class OptionsParser < Hash
     attr_accessor :options, :booleans, :strings
 
     def initialize(options)

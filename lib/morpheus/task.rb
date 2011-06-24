@@ -25,7 +25,7 @@ module Morpheus
 
     def call_block
       if block
-        block.call
+        @namespace_instance.instance_eval(&block)
       else
         application.task_without_a_block!
       end

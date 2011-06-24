@@ -3,7 +3,6 @@ Feature: Morpheus Options Parser
   As a user
   I want to pass the options via command line
 
-  @announce
   Scenario: Pass a String in the Options Parser
 	Given a file named "Tasks" with:
     """
@@ -41,7 +40,7 @@ Feature: Morpheus Options Parser
 	{"dont"=>"drink"}
 
     """  
-  
+  @announce
   Scenario: Pass a boolean and return false when is not passed in the Options Parser
 	Given a file named "Tasks" with:
     """
@@ -60,7 +59,7 @@ Feature: Morpheus Options Parser
     {"list"=>"helpers"}
 
     """
-
+  @announce
   Scenario: Dont run when not pass required options
 	Given a file named "Tasks" with:
     """
