@@ -15,6 +15,20 @@
   end
 end
 
+# Chamando na linha de comando
+
+# $ task spec
+
+# Na implementacao ele vai rodar um RSpecMethod.new({:format => :progress}).call
+
+# a implementação desse metodo #rspec
+
+class RSpecMethod < Morpheus::Method
+  def call
+    puts options
+  end
+end
+
 # New idea
 #
 class CrudGenerator < Morpheus::Generator

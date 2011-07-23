@@ -241,7 +241,6 @@ To know all just run:
 
         Main Helpers
         -------------
-          * require_files
           * require_tasks
 
         Base Helpers

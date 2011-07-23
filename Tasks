@@ -5,3 +5,6 @@ class Tasks < Morpheus::Base
   # rcov
   # cucumber format: :progress, ruby_versions: %w(1.9.2 ree)
 end
+
+:morpheus.tasks do
+end
