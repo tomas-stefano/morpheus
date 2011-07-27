@@ -1,10 +1,9 @@
 #!/usr/bin/env ruby
-class Tasks < Morpheus::Base
-  # rspec ruby_versions: %w(1.9.2 ree)
-  # rdoc  title: 'Morpheus - Task Framework'
-  # rcov
-  # cucumber format: :progress, ruby_versions: %w(1.9.2 ree)
-end
-
-:morpheus.tasks do
+class MorpheusTasks < Morpheus::Base
+  rubygem
+  rspec 'spec:rubies', :ruby_versions => %w(1.9.2 ree jruby rbx)
+  cucumber :format => :progress, :ruby_versions => %w(1.9.2 ree jruby rbx)
+  coverage
+  rdoc :doc, :title => 'Morpheus - Task Framework'
+  stats
 end
