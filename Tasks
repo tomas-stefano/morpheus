@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 class MorpheusTasks < Morpheus::Base
-  rubygem
+  rubygems
   rspec 'spec:rubies', :ruby_versions => %w(1.9.2 ree jruby rbx)
   cucumber :format => :progress, :ruby_versions => %w(1.9.2 ree jruby rbx)
   coverage

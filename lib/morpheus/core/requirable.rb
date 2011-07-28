@@ -1,4 +1,4 @@
 module Morpheus
-  class Base
+  class Requirable
   end
 end

@@ -11,6 +11,9 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
+    active_support (3.0.0)
+      activesupport (= 3.0.0)
+    activesupport (3.0.0)
     archive-tar-minitar (0.5.2)
     aruba (0.3.7)
       childprocess (>= 0.1.9)
@@ -30,6 +33,7 @@ GEM
     ffi (1.0.9)
     gherkin (2.4.1)
       json (>= 1.4.6)
+    i18n (0.6.0)
     json (1.5.3)
     linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
@@ -59,8 +63,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_support
   aruba (= 0.3.7)
   cucumber (= 1.0.0)
+  i18n
   infinity_test!
   rspec (= 2.6.0)
   ruby-debug19

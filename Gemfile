@@ -1,6 +1,11 @@
 #!/usr/bin/env ruby
 source :rubygems
 
+group :deps do
+  gem 'active_support'
+  gem 'i18n'
+end
+
 group :test do
   gem 'infinity_test', :git => 'git@github.com:tomas-stefano/infinity_test.git'
   gem 'rspec', '2.6.0'

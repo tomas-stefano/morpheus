@@ -72,7 +72,7 @@ In case you need an existent task called rspec for example:
      end
 
      class RSpecTask < Morpheus::Task
-       def call
+       def run
          # puts hash_options # hash_options will be a method and in this case will return # => { :color => true, :format => :doc}
        end
      end
@@ -88,7 +88,7 @@ It's possible to use a block to:
      end
 
      class RubyExtensionTask < Morpheus::Task
-       def call
+       def run
          # will be a method called #action that will return a proc object
        end
      end
@@ -150,15 +150,15 @@ In the Morpheus Core will exist this tasks:
 
 * Create a many shell helpers to use in the tasks. Shell Helpers:
 
-		#ask - Make a question
-		#git - Run a git command
-		#say - Say something in a stream
-		#run - Run an shell command
-		#run_without_aborting - Run a shell command and if have error continues
-		#ruby - Run the ruby command
-		#python - Run the python command
-		#java - Run the java command
-		#mysql - Run the mysql command
+		# ask - Make a question
+		# git - Run a git command
+		# say - Say something in a stream
+		# run - Run an shell command
+		# run_without_aborting - Run a shell command and if have error continues
+		# ruby - Run the ruby command
+		# python - Run the python command
+		# java - Run the java command
+		# mysql - Run the mysql command
 
 #### Options Parser
 
@@ -198,7 +198,6 @@ And in the command line
      $ super_ls --root
 
 Will list all the files.
-
 
 ### Generators
 
