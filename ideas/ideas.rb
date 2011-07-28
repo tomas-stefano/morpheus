@@ -90,7 +90,6 @@ class RSpecTask < Morpheus::TaskMethod
   def run(options)
     puts options # => { :ruby_versions => '1.8.7,1.9.2', :format => :progress }
   end
-
 end
 
 class RubyBinary < Morpheus::TaskMethod

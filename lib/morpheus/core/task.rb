@@ -36,12 +36,7 @@ module Morpheus
       # Array[Class]
       #
       def register_methods
-        subclasses.each do |subclass|
-          Base.instance_eval <<-RUBY, __FILE__, __LINE__
-            def #{subclass.method_name}(options)
-            end
-          RUBY
-        end
+        subclasses.each { |subclass| Base.create_method(subclass.method_name) }
       end
     end
   end
