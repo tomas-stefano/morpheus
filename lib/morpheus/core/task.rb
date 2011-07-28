@@ -25,7 +25,22 @@ module Morpheus
         if _method_name
           @_method_name = _method_name
         else
-          @_method_name ||= self.to_s.underscore.to_sym
+          @_method_name ||= self.to_s.underscore.gsub("_task", "").to_sym
+        end
+      end
+
+      # Register all methods from Morpheus::Task subclasses and add in the Morpheus::Base scope
+      # If is a better way to do it, refactor this code.
+      #
+      # ==== Returns
+      # Array[Class]
+      #
+      def register_methods
+        subclasses.each do |subclass|
+          Base.instance_eval <<-RUBY, __FILE__, __LINE__
+            def #{subclass.method_name}(options)
+            end
+          RUBY
         end
       end
     end

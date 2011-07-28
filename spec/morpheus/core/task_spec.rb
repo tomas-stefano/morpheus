@@ -9,8 +9,8 @@ module Morpheus
     end
 
     describe '.method_name' do
-      it 'should return the method name from superclass' do
-        ExampleTask.method_name.should equal :example_task
+      it 'should return the method name from superclass and remove the _task word' do
+        ExampleTask.method_name.should equal :example
       end
 
       it 'should return the defined method in the class itself' do
@@ -19,6 +19,16 @@ module Morpheus
 
       it 'should return the method name setting in the subclass' do
         RdocExample.method_name.should equal :rdocxyz
+      end
+    end
+
+    describe '.register_methods' do
+      before do
+        Task.register_methods
+      end
+
+      it 'should removing the word Task in the subclasses of Task and add class method in the Base scope class' do
+        Base.methods.sort.should include(:rspec, :rdoc, :ruby_extension, :stats, :yardoc, :backup)
       end
     end
   end
