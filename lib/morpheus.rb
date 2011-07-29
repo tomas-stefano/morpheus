@@ -17,4 +17,4 @@ module Morpheus
   include Main
 end
 
-require 'morpheus/contrib/base'
+require 'morpheus/contrib/all'

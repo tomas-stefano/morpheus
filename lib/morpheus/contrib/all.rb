@@ -5,6 +5,7 @@
   cucumber
   rdoc
   rspec
+  rubygems
   ruby_extension
   stats
   test_unit

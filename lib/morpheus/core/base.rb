@@ -13,8 +13,8 @@ module Morpheus
       #
       def method_added(__method_name__)
         return unless public_instance_methods.include?(__method_name__) or public_instance_methods.include?(__method_name__.to_sym)
-        create_task(__method_name__)
-        self.tasks.push(Task.new(__method_name__, :namespace => self))
+        create_task(__method_name__) # SIGNATURE
+        add_task(__method_name__)
       end
 
       # Returns the classes that inherits from Morpheus::Base
@@ -51,10 +51,14 @@ module Morpheus
       # ==== Returns
       # TrueClass[Class]
       #      
-      def create_method(method_name)
-        Base.instance_eval <<-RUBY, __FILE__, __LINE__
-          def #{method_name}(*args)
-            # Task.new(#{method_name}, args)
+      def create_method(subclass)
+        _method_name_ = subclass.method_name
+        Base.instance_eval <<-RUBY, __FILE__, __LINE__ + 1
+          def #{_method_name_}(*args)
+            args.unshift("#{subclass.method_name}")
+            args.last << {:description => ''}
+            args.last[:namespace] = self
+            self.add_task(args) # TODO: Put a description method
           end
         RUBY
         true
@@ -67,6 +71,15 @@ module Morpheus
       #
       def tasks
         @tasks ||= []
+      end
+      
+      def add_task(*args)
+        if args.last.respond_to?(:store)
+          args.last.store(:namespace, self)
+        else
+          args << {:namespace => self}
+        end
+        self.tasks.push(Task.new(*args))
       end
       
       # Find task by name in the self scope.

@@ -46,11 +46,12 @@ module Morpheus
       # Array[Class]
       #
       def register_methods
-        subclasses.each { |subclass| Base.create_method(subclass.method_name) }
+        subclasses.each { |subclass| Base.create_method(subclass) }
       end
     end
     
     def initialize(*args)
+      args.flatten!
       @options = args.extract_options!
       @name = args.shift
       @namespace = @options[:namespace]

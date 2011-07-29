@@ -20,9 +20,13 @@ module Morpheus
       it "each element should be instance of Morpheus::Task" do
         App.tasks.all? { |element| element.should be_instance_of(Morpheus::Task) }
       end
+      
+      it "should return the provided tasks" do
+        SimpleTasks.should have_task(:test_unit, :doc)
+      end
     end
     
-    describe "#filename" do
+    describe ".filename" do
       it "should return the filename that task is defined" do
         App.filename.should == File.expand_path("spec/samples/core/tasks/app.rb")
       end
