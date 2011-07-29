@@ -48,6 +48,10 @@ module Morpheus
       it "should return the comment above the method definition" do
         App.find_task(:list).description.should == "Listing things from apps"
       end
+      
+      it "should possible to overide the description parser" do
+        Task.new(:list, :description => "Listing stuff").description.should == "Listing stuff"
+      end
     end
   end
 end
