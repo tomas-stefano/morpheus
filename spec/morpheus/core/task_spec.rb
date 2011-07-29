@@ -31,5 +31,23 @@ module Morpheus
         Base.methods.sort.should include(:rspec, :rdoc, :ruby_extension, :stats, :yardoc, :backup)
       end
     end
+    
+    describe "#name" do
+      it "should return the name of the task" do
+        Task.new(:list).name.should equal :list
+      end
+    end
+    
+    describe "#namespace" do
+      it "should keep the namespace of the task" do
+        App.find_task(:list).namespace.should equal App
+      end
+    end
+    
+    describe "#description" do
+      it "should return the comment above the method definition" do
+        App.find_task(:list).description.should == "Listing things from apps"
+      end
+    end
   end
 end

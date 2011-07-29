@@ -1,5 +1,6 @@
 module Morpheus
   class Task
+    attr_accessor :name, :description, :namespace
     class << self
       # Everytime someone inherits from Morpheus::Task class, register the klass.
       #
@@ -17,6 +18,15 @@ module Morpheus
       end
 
       # Returns the method name that will be used in the scope of Morpheus::Base class
+      # If the user don't pass a method name that class name will be used but without Task word
+      #
+      # ==== Example
+      #
+      #   class GitTask < Morpheus::Task
+      #     method_name :precious_git
+      #   end
+      #
+      #   Then the #precious_git method will be added in the Morpheus::Base scope class
       #
       # ==== Returns
       # Symbol[Class]
@@ -38,6 +48,13 @@ module Morpheus
       def register_methods
         subclasses.each { |subclass| Base.create_method(subclass.method_name) }
       end
+    end
+    
+    def initialize(*args)
+      @options = args.extract_options!
+      @name = args.shift
+      @namespace = @options[:namespace]
+      @description = ::Morpheus::Main::Description.new(self) if @namespace.respond_to?(:filename)
     end
   end
 end

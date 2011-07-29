@@ -7,6 +7,9 @@ module Morpheus
   autoload :Task, 'morpheus/core/task'
 
   module Main
+    # TODO: Move to a Internal module
+    autoload :Description, 'morpheus/main/description' 
+    autoload :Matchers, 'morpheus/main/matchers'    
     autoload :Requirable, 'morpheus/main/requirable'
     autoload :Runner, 'morpheus/main/runner'
   end
