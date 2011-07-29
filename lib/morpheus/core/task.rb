@@ -55,8 +55,11 @@ module Morpheus
       @options = args.extract_options!
       @name = args.shift
       @namespace = @options[:namespace]
-      @description = ::Morpheus::Main::Description.new(self) if @namespace.respond_to?(:filename)
-      @description = @options[:description] if @options[:description]
+      @description = if @options[:description]
+        @options[:description]
+      else
+        ::Morpheus::Main::Description.new(self) if @namespace.respond_to?(:filename)
+      end
     end
   end
 end

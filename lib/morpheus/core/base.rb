@@ -50,15 +50,15 @@ module Morpheus
       #
       # ==== Returns
       # TrueClass[Class]
-      #      
+      #
+      # REFACTOR ME: Refactor that way that handles provided method.
+      #
       def create_method(subclass)
         _method_name_ = subclass.method_name
-        Base.instance_eval <<-RUBY, __FILE__, __LINE__ + 1
+        self.instance_eval <<-RUBY, __FILE__, __LINE__ + 1
           def #{_method_name_}(*args)
-            args.unshift("#{subclass.method_name}")
-            args.last << {:description => ''}
-            args.last[:namespace] = self
-            self.add_task(args) # TODO: Put a description method
+            args.unshift(:"#{subclass.method_name.to_sym}") if args.first.is_a?(Hash)
+            self.tasks.push(Task.new(*args, :description => '', :namespace => self))
           end
         RUBY
         true
@@ -74,12 +74,7 @@ module Morpheus
       end
       
       def add_task(*args)
-        if args.last.respond_to?(:store)
-          args.last.store(:namespace, self)
-        else
-          args << {:namespace => self}
-        end
-        self.tasks.push(Task.new(*args))
+        self.tasks.push(Task.new(*args, :namespace => self))
       end
       
       # Find task by name in the self scope.
