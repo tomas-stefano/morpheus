@@ -61,7 +61,7 @@ module Morpheus
       # TrueClass[Class]
       #
       def create_method(subclass)
-        ProvidedTask.new(subclass, self).create_method
+        ProvidedTask.new(subclass).create_method
       end
       
       # Return tasks for the current subclass

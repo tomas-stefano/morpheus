@@ -2,11 +2,10 @@ module Morpheus
   # Class Responsible to create the method that is provided by the Morpheus::Task subclasses
   #
   class ProvidedTask
-    attr_reader :subclass, :namespace, :method_name
-    def initialize(subclass, namespace)
+    attr_reader :subclass, :method_name
+    def initialize(subclass)
       @subclass = subclass
       @method_name = subclass.method_name
-      @namespace = namespace
     end
     
     # Create the method in the baseclass
