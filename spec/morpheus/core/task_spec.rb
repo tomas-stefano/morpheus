@@ -23,11 +23,8 @@ module Morpheus
     end
 
     describe '.register_methods' do
-      before do
-        Task.register_methods
-      end
-
       it 'should add class method in the Base scope class and removing Task word from them' do
+        Morpheus::Task.register_methods
         Base.methods.sort.should include(:rspec, :rdoc, :ruby_extension, :stats, :yardoc, :backup)
       end
     end
@@ -55,6 +52,28 @@ module Morpheus
       
       it "should be possible to override the behavior with a different description class" do
         OverrideDescriptionTask.find_task(:list).description.should == "Super description"
+      end
+    end
+    
+    describe "#provided_by" do
+      it "should return the class that this task is provided by" do
+        SimpleTasks.find_task(:doc).provided_by.should equal RdocTask
+      end
+    end
+    
+    describe "#provided_instance" do
+      it "should return a instance of provided by class" do
+        SimpleTasks.find_task(:doc).provided_instance.should be_instance_of(RdocTask)
+      end
+    end
+
+    describe "#run" do
+      it "should be possible to run a task" do
+        App.find_task(:list).run.should == "Listing ..."
+      end
+      
+      it "should be possible to run a provided task" do
+        SimpleTasks.find_task(:provided_example_task).run.should == {:format => :doc, :ls => true}
       end
     end
   end

@@ -1,6 +1,6 @@
 module Morpheus
   class Task
-    attr_accessor :name, :description, :namespace
+    attr_accessor :name, :description, :namespace, :provided_by, :options
     class << self
       # Everytime someone inherits from Morpheus::Task class, register the klass.
       #
@@ -51,10 +51,12 @@ module Morpheus
     end
     
     def initialize(*args)
-      options = args.extract_options!
-      @name = args.shift
-      @namespace = options.delete(:namespace)
+      options      = args.extract_options!
+      @name        = args.shift
+      @namespace   = options.delete(:namespace)
       @description = options.delete(:description) || parse_description
+      @provided_by = options.delete(:provided_by)
+      @options     = options
     end
 
     # Choose the Description class to parse the task description for @namespace
@@ -64,6 +66,31 @@ module Morpheus
     #
     def parse_description
       @namespace.description.new(self).parse! if @namespace.respond_to?(:filename)
+    end
+    
+    def provided_instance
+      @provided_by.new(@options)
+    end
+    
+    # Run a task in the Namespace instance just calling the method
+    # If is a provided task, read the section below
+    #
+    # ==== Conventions
+    #
+    #    class RdocTask < Morpheus::Task
+    #      def run
+    #      end
+    #    end
+    #
+    # Then will create a instance RdocTask and call #run
+    #
+    def run
+      namespace_instance = @namespace.instance
+      if namespace_instance.respond_to?(@name)
+        namespace_instance.send(@name)
+      else
+        provided_instance.run
+      end
     end
   end
 end

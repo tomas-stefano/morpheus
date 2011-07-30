@@ -42,6 +42,14 @@ module Morpheus
       it "should return the provided tasks" do
         SimpleTasks.should have_task(:test_unit, :doc)
       end
+      
+      it "should return the provided task with the customizd name of the task" do
+        SimpleTasks.find_task(:doc).name.should equal :doc
+      end
+
+      it "should return the provided task with the customized options of the task" do
+        SimpleTasks.find_task(:test_unit).options.should == {:ruby_versions => %w(jruby 1.9.2)}
+      end
     end
     
     describe ".description" do

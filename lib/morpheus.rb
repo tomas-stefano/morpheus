@@ -5,6 +5,7 @@ module Morpheus
   autoload :Binary, 'morpheus/core/binary'
   autoload :Description, 'morpheus/core/description'  
   autoload :Generator, 'morpheus/core/generator'
+  autoload :ProvidedTask, 'morpheus/core/provided_task'
   autoload :Task, 'morpheus/core/task'
 
   module Main

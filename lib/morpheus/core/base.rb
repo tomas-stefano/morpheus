@@ -60,17 +60,8 @@ module Morpheus
       # ==== Returns
       # TrueClass[Class]
       #
-      # REFACTOR ME: Refactor that way that handles provided method.
-      #
       def create_method(subclass)
-        _method_name_ = subclass.method_name
-        self.instance_eval <<-RUBY, __FILE__, __LINE__ + 1
-          def #{_method_name_}(*args)
-            args.unshift(:"#{subclass.method_name.to_sym}") if args.first.is_a?(Hash)
-            self.tasks.push(Task.new(*args, :description => '', :namespace => self))
-          end
-        RUBY
-        true
+        ProvidedTask.new(subclass, self).create_method
       end
       
       # Return tasks for the current subclass

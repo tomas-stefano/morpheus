@@ -1,5 +1,7 @@
 class ExampleTask < Morpheus::Task
   def run
-    'Running Example Task!'
+    options
   end
 end
+
+Morpheus::Task.register_methods
