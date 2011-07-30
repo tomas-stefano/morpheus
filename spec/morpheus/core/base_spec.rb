@@ -70,7 +70,7 @@ module Morpheus
         FactoryExampleTasks.description.should equal MyDescription
       end
     end
-
+    
     describe ".filename" do
       it "should return the filename that task is defined" do
         App.filename.should == File.expand_path("spec/samples/core/tasks/app.rb")
