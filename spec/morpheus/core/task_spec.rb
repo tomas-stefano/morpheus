@@ -27,7 +27,7 @@ module Morpheus
         Task.register_methods
       end
 
-      it 'should removing the word Task in the subclasses of Task and add class method in the Base scope class' do
+      it 'should add class method in the Base scope class and removing Task word from them' do
         Base.methods.sort.should include(:rspec, :rdoc, :ruby_extension, :stats, :yardoc, :backup)
       end
     end
@@ -49,8 +49,12 @@ module Morpheus
         App.find_task(:list).description.should == "Listing things from apps"
       end
       
-      it "should possible to overide the description parser" do
+      it "should possible to overide the description parser with options" do
         Task.new(:list, :description => "Listing stuff").description.should == "Listing stuff"
+      end
+      
+      it "should be possible to override the behavior with a different description class" do
+        OverrideDescriptionTask.find_task(:list).description.should == "Super description"
       end
     end
   end

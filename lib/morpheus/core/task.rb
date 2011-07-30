@@ -58,7 +58,7 @@ module Morpheus
       @description = if @options[:description]
         @options[:description]
       else
-        ::Morpheus::Main::Description.new(self) if @namespace.respond_to?(:filename)
+        @namespace.description.new(self).parse! if @namespace.respond_to?(:filename)
       end
     end
   end

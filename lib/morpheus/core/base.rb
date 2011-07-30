@@ -73,6 +73,11 @@ module Morpheus
         @tasks ||= []
       end
       
+      # Add task as a namespace of the self scope
+      #
+      # ==== Returns
+      # Task[Class]
+      #
       def add_task(*args)
         self.tasks.push(Task.new(*args, :namespace => self))
       end
@@ -84,6 +89,19 @@ module Morpheus
       #
       def find_task(task_name)
         tasks.find { |task| task.name.equal?(task_name) }
+      end
+      
+      # Set another Description class that will be used to parse the description in the self scope.
+      #
+      def description=(description_class)
+        @description = description_class
+      end
+      
+      def description(description_class=nil)
+        if description_class
+          @description = description_class
+        end
+        @description || Morpheus::Description
       end
       
       # SIGNATURE: Be possible to users defines behavior when the method is added to the class.

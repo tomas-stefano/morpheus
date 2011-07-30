@@ -26,6 +26,25 @@ module Morpheus
       end
     end
     
+    describe ".description" do
+      it "should be possible calling method in the subclass and overide the defaults" do
+        OverrideDescriptionSecondVersion.description.should equal MyDescription
+      end
+      
+      it "should be possible to set with equal sign in the subclass" do
+        OverrideDescriptionTask.description.should equal MyDescription
+      end
+      
+      it "Morpheus::Description should be the default description class" do
+        App.description.should equal Morpheus::Description
+      end
+      
+      it "should be possible to set the description class" do
+        FactoryExampleTasks.description = MyDescription
+        FactoryExampleTasks.description.should equal MyDescription
+      end
+    end
+    
     describe ".filename" do
       it "should return the filename that task is defined" do
         App.filename.should == File.expand_path("spec/samples/core/tasks/app.rb")
