@@ -6,4 +6,5 @@ Dir["spec/samples/*/*/*"].each { |file| load(file) }
 
 RSpec.configure do |config|
   config.include Morpheus::Matchers
+  config.mock_with :rr
 end

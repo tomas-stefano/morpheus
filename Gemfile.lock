@@ -38,6 +38,7 @@ GEM
     linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
     notifiers (1.1.0)
+    rr (1.0.3)
     rspec (2.6.0)
       rspec-core (~> 2.6.0)
       rspec-expectations (~> 2.6.0)
@@ -68,5 +69,6 @@ DEPENDENCIES
   cucumber (= 1.0.0)
   i18n
   infinity_test!
+  rr (= 1.0.3)
   rspec (= 2.6.0)
   ruby-debug19

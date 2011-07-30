@@ -11,6 +11,7 @@ group :test do
   gem 'rspec', '2.6.0'
   gem 'cucumber', '1.0.0'
   gem 'aruba', '0.3.7'
+  gem 'rr', '1.0.3'
 end
 
 platform :mri_19 do
