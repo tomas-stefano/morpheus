@@ -1,8 +1,7 @@
 module Morpheus
   module Main
     module Matchers
-      include RSpec::Matchers
-      
+      include RSpec::Matchers  
       # :call-seq:
       #   should have_task(expected)
       #   should_not have_task(expected)

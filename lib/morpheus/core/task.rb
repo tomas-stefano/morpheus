@@ -51,15 +51,19 @@ module Morpheus
     end
     
     def initialize(*args)
-      args.flatten!
-      @options = args.extract_options!
+      options = args.extract_options!
       @name = args.shift
-      @namespace = @options[:namespace]
-      @description = if @options[:description]
-        @options[:description]
-      else
-        @namespace.description.new(self).parse! if @namespace.respond_to?(:filename)
-      end
+      @namespace = options.delete(:namespace)
+      @description = options.delete(:description) || parse_description
+    end
+
+    # Choose the Description class to parse the task description for @namespace
+    #
+    # ==== Returns
+    # Description[Class]
+    #
+    def parse_description
+      @namespace.description.new(self).parse! if @namespace.respond_to?(:filename)
     end
   end
 end
