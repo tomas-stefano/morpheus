@@ -16,11 +16,19 @@ module Morpheus
     def initialize(task)
       @task = task
       @filename = @task.namespace.filename
-      @content  = File.open(@filename, "r") { |f| f.read }        
-      @results  = rdoc_parser.scan
+      if File.exist?(@filename)
+        @content  = File.open(@filename, "r") { |f| f.read }
+        @results  = rdoc_parser.scan
+      else
+        @results = ""
+      end
     end
-    
+
+    # Parse the task search through the comment for the given method in the given namespace
+    # If the file don't exist, return an empty string
+    #
     def parse!
+      return self if results.is_a?(String)
       self << results.classes.find { |klass| klass.name == "#{@task.namespace}" }.method_list.find { |method_name| method_name.name == @task.name.to_s }.comment
     end
     
