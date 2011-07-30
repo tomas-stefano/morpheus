@@ -93,6 +93,24 @@ It's possible to use a block to:
        end
      end
 
+### Callbacks
+
+Be possible to set callback like:
+
+    class Tasks < Morpheus::Base
+      before_task :list, :call => :warn_about_something
+      after_task :list, :call => :important_message
+
+      def list
+      end
+
+      def warn_about_something
+      end
+
+      def important_message
+      end
+    end
+
 ### Require tasks
 
 Create a way to require other file with the *.tasks
@@ -135,7 +153,7 @@ In the Morpheus Core will exist this tasks:
        simplecov
        rcov
 
-       # Ruby Extensions
+       # Ruby C Extensions
        #
        ruby_extension
 
