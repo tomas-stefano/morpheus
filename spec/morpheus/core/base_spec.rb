@@ -71,6 +71,12 @@ module Morpheus
       end
     end
     
+    describe ".provided_task" do
+      it "should return the provided_task class" do
+        Base.provided_task.should equal ProvidedTask
+      end
+    end
+    
     describe ".filename" do
       it "should return the filename that task is defined" do
         App.filename.should == File.expand_path("spec/samples/core/tasks/app.rb")

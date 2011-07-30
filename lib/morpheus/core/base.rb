@@ -61,7 +61,7 @@ module Morpheus
       # TrueClass[Class]
       #
       def create_method(subclass)
-        Morpheus::ProvidedTask.new(subclass).create_method
+        provided_task.new(subclass).create_method
       end
       
       # Return tasks for the current subclass
@@ -119,6 +119,12 @@ module Morpheus
           self.description = description_class
         end
         @description || Morpheus::Description
+      end
+      
+      # Be possible to users override this and plug with own behaviors
+      #
+      def provided_task
+        Morpheus::ProvidedTask
       end
       
       # SIGNATURE: Be possible to users defines behavior when the method is added to the class.
