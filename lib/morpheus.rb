@@ -14,6 +14,7 @@ module Morpheus
   end
   
   module Internals
+    autoload :Options, 'morpheus/internals/options'
     autoload :ProvidedTask, 'morpheus/internals/provided_task'
   end
 
