@@ -241,13 +241,32 @@ To test this generator:
 
     class CustomGeneratorTest < Morpheus::GeneratorTestCase
        arguments %w(MySuper)
+  
+       def setup
+         prepare_destination
+         run_generator
+       end
 
        def test_controller_file_should_exist
-         run_generator
          assert_file 'app/controllers/my_super.rb' do |content|
            assert_match /class MySuper/, content
          end
        end
+    end
+
+    describe CustomGeneratorTest do
+      arguments %w(MySuper)
+
+      before do
+        prepare_destination
+        run_generator
+      end
+
+      it "file should exist" do
+        should have_file("app/controllers/my_super.rb").with_content do |content|
+          content.should match /class MySuper/
+        end
+      end
     end
 
 System Helpers
