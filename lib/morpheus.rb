@@ -8,7 +8,7 @@ module Morpheus
   autoload :Task, 'morpheus/core/task'
 
   module Main
-    autoload :Matchers, 'morpheus/main/matchers'    
+    autoload :Matchers, 'morpheus/main/matchers'
     autoload :Requirable, 'morpheus/main/requirable'
     autoload :Runner, 'morpheus/main/runner'
   end

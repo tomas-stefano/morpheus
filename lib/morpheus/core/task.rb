@@ -50,13 +50,19 @@ module Morpheus
       end
     end
     
+    # When don't pass the arguments is a provided task else is a normal task
+    #
     def initialize(*args)
-      options      = args.extract_options!
-      @name        = args.shift
-      @namespace   = options.delete(:namespace)
-      @description = options.delete(:description) || parse_description
-      @provided_by = options.delete(:provided_by)
-      @options     = options
+      options = args.extract_options!
+      if args.empty?
+        @name = self.class.method_name
+      else
+        @name        = args.shift
+        @namespace   = options.delete(:namespace)
+        @description = options.delete(:description) || parse_description
+        @provided_by = options.delete(:provided_by)
+      end
+      @options = options
     end
 
     # Choose the Description class to parse the task description for @namespace

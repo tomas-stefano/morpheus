@@ -33,8 +33,12 @@ module Morpheus
       it "should return the name of the task" do
         Task.new(:list).name.should equal :list
       end
+      
+      it "should return the name for provided task" do
+        RdocTask.new.name.should equal :rdoc
+      end
     end
-    
+
     describe "#namespace" do
       it "should keep the namespace of the task" do
         App.find_task(:list).namespace.should equal App
