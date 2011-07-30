@@ -16,6 +16,15 @@ module Morpheus
         create_task(__method_name__) # SIGNATURE
         add_task(__method_name__)
       end
+      
+      # Uses the singleton pattern. I prefer to do it myself instead uses the singleton ruby stdlib 
+      #
+      # ==== Returns
+      # Base[Class] or self[Class]
+      #
+      def instance
+        @instance ||= new
+      end
 
       # Returns the classes that inherits from Morpheus::Base
       #
@@ -97,9 +106,26 @@ module Morpheus
         @description = description_class
       end
       
+      # Will find the description class to be used for the self scope when creating a task
+      #
+      # ==== Examples
+      # 
+      #   class Mydescrition < Morpheus::Descrition
+      #     def parse!
+      #       # ... put your logic here!
+      #       # puts self
+      #     end
+      #   end
+      #
+      #   class Tasks < Morpheus::Base
+      #     description MyDescription
+      #   end
+      #
+      # The description class for Tasks scope is MyDescription
+      #
       def description(description_class=nil)
         if description_class
-          @description = description_class
+          self.description = description_class
         end
         @description || Morpheus::Description
       end

@@ -3,7 +3,6 @@ class MorpheusTasks < Morpheus::Base
   rubygems
   rspec 'spec:rubies', :ruby_versions => %w(1.9.2 ree jruby rbx)
   cucumber :format => :progress, :ruby_versions => %w(1.9.2 ree jruby rbx)
-  coverage
   rdoc :doc, :title => 'Morpheus - Task Framework'
   stats
 end

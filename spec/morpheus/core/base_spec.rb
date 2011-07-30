@@ -8,6 +8,24 @@ module Morpheus
       end
     end
     
+    describe ".instance" do
+      it "should use the singleton pattern" do
+        Base.instance.should equal Base.instance
+      end
+      
+      it "should use the singleton pattern for subclasses" do
+        App.instance.should equal App.instance
+      end
+      
+      it "should be instance of Base" do
+        Base.instance.should be_instance_of(Base)
+      end
+      
+      it "should be instance of namespace scope" do
+        App.instance.should be_instance_of(App)
+      end
+    end
+    
     describe ".tasks" do
       it "should return all the tasks from Base subclasses" do
         App.should have_task(:list, :help)
@@ -44,7 +62,7 @@ module Morpheus
         FactoryExampleTasks.description.should equal MyDescription
       end
     end
-    
+
     describe ".filename" do
       it "should return the filename that task is defined" do
         App.filename.should == File.expand_path("spec/samples/core/tasks/app.rb")

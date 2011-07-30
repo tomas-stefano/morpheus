@@ -1,5 +1,5 @@
 class ExampleTask < Morpheus::Task
   def run
-    'Running Task!'
+    'Running Example Task!'
   end
 end
