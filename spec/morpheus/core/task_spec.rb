@@ -33,10 +33,6 @@ module Morpheus
       it "should return the name of the task" do
         Task.new(:list).name.should equal :list
       end
-      
-      it "should return the name for provided task" do
-        RdocTask.new.name.should equal :rdoc
-      end
     end
 
     describe "#namespace" do
@@ -63,6 +59,10 @@ module Morpheus
       it "should return the class that this task is provided by" do
         SimpleTasks.find_task(:doc).provided_by.should equal RdocTask
       end
+      
+      it "should return the same namespace when is task added by the namespace" do
+        App.find_task(:list).provided_by.should equal App
+      end
     end
     
     describe "#provided_instance" do
@@ -78,6 +78,12 @@ module Morpheus
       
       it "should be possible to run a provided task" do
         SimpleTasks.find_task(:provided_example_task).run.should == {:format => :doc, :ls => true}
+      end
+      
+      it "should raise error when not have the run method in the subclass" do
+        expect {
+          SimpleTasks.find_task(:without_run_method).run
+        }.to raise_error(NoMethodError, "The class #{WithoutRunMethod} don't have the method #run. The Morpheus convention is to call the #run method for Method::Task subclasses.")
       end
     end
   end

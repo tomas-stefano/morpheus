@@ -54,14 +54,10 @@ module Morpheus
     #
     def initialize(*args)
       options = args.extract_options!
-      if args.empty?
-        @name = self.class.method_name
-      else
-        @name        = args.shift
-        @namespace   = options.delete(:namespace)
-        @description = options.delete(:description) || parse_description
-        @provided_by = options.delete(:provided_by)
-      end
+      @name        = args.shift || self.class.method_name
+      @namespace   = options.delete(:namespace)
+      @description = options.delete(:description) || parse_description
+      @provided_by = options.delete(:provided_by) || @namespace
       @options = options
     end
 
@@ -91,6 +87,7 @@ module Morpheus
     # Then will create a instance RdocTask and call #run
     #
     def run
+      raise NoMethodError, "The class #{self.class} don't have the method #run. The Morpheus convention is to call the #run method for Method::Task subclasses." unless @namespace
       namespace_instance = @namespace.instance
       if namespace_instance.respond_to?(@name)
         namespace_instance.send(@name)
