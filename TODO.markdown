@@ -274,13 +274,11 @@ Create this methods that will return true or false:
  * yarv?
  * jruby?
  * macruby?
- * ree?
  * rubinius?
 
 SO:
 
  * windows?
- * bsd?
+ * unix?
  * linux?
  * mac?
- * solaris?

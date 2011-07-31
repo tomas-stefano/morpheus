@@ -128,9 +128,26 @@ module Morpheus
       end
       
       # Be possible to users override this and plug with own behaviors
+      # Put a class that the instances respond to #create_method
       #
       def provided_task
         Morpheus::ProvidedTask
+      end
+      
+      # Setting the default task when the user don't pass any arguments in the command line.
+      #
+      # ==== Examples
+      #
+      #    class Tasks < Morpheus::Base
+      #      default :list
+      #
+      #      def list
+      #      end
+      #    end
+      #
+      def default(default_task=nil)
+        @default_task = default_task if default_task
+        @default_task
       end
       
       # SIGNATURE: Be possible to users defines behavior when the method is added to the class.

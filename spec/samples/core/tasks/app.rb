@@ -1,4 +1,6 @@
 class App < Morpheus::Base
+  default :list
+  
   # Listing things from apps
   #
   def list
@@ -6,8 +8,11 @@ class App < Morpheus::Base
   end
 
   # Listing Banner for lost users
+  # Simple Explain in how to use the App
+  # :)
+  #
   def help
-    'Banner'
+    'Usage: app_command file.rb [Options]'
   end
   
   def task_without_comment

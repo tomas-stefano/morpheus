@@ -85,6 +85,12 @@ module Morpheus
       it "Do something when I want invoke a task that dont exist ... raise error or return nil???"
     end
     
+    describe ".default" do
+      it "should return the default task to run" do
+        App.default.should be :list
+      end
+    end
+    
     describe ".filename" do
       it "should return the filename that task is defined" do
         App.filename.should == File.expand_path("spec/samples/core/tasks/app.rb")
