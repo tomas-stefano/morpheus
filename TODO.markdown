@@ -73,7 +73,7 @@ In case you need an existent task called rspec for example:
 
      class RSpecTask < Morpheus::Task
        def run
-         # puts hash_options # hash_options will be a method and in this case will return # => { :color => true, :format => :doc }
+         # puts options # options will be a method and in this case will return # => { :color => true, :format => :doc }
        end
      end
 
