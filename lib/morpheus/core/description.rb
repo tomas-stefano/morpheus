@@ -29,7 +29,12 @@ module Morpheus
     #
     def parse!
       return self if results.is_a?(String)
-      self << results.classes.find { |klass| klass.name == "#{@task.namespace}" }.method_list.find { |method_name| method_name.name == @task.name.to_s }.comment
+      
+      if results_class
+        self.concat(find_comment_for_method)
+      end
+      
+      self
     end
     
     def rdoc_parser
@@ -47,5 +52,14 @@ module Morpheus
     def top_level
       RDoc::TopLevel.new(@filename)
     end
+    
+    private
+      def results_class
+        @results_class ||= results.classes.find { |klass| klass.name == "#{@task.namespace}" }
+      end
+      
+      def find_comment_for_method
+        results_class.method_list.find { |method_name| method_name.name == @task.name.to_s }.comment
+      end
   end
 end

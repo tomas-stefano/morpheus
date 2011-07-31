@@ -41,7 +41,7 @@ Will list all the tasks in each namespace.
            end
          end
 
-   2º Alternative:
+   2º Alternative: (Need to think more about the DSL)
 
         :lib.tasks do
            :abc.task do
@@ -49,7 +49,7 @@ Will list all the tasks in each namespace.
            end
         end
 
-#### Nested Namespaces
+#### Nested Namespaces (Need to think more about the DSL method)
 
     :time.tasks do
        :zones.tasks do
