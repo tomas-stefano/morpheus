@@ -22,6 +22,12 @@ module Morpheus
         mock(description.results).classes { [] }
         description.parse!.should == ''
       end
+      
+      it "should not raise error if don't find the method in method list" do
+        description = Description.new(list_task)
+        mock(description).find_method { nil }
+        description.parse!.should == ''
+      end
     end
   end
 end

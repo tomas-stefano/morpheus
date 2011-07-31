@@ -31,7 +31,7 @@ module Morpheus
       return self if results.is_a?(String)
       
       if results_class
-        self.concat(find_comment_for_method)
+        self.concat(find_method.try(:comment).to_s)
       end
       
       self
@@ -58,8 +58,8 @@ module Morpheus
         @results_class ||= results.classes.find { |klass| klass.name == "#{@task.namespace}" }
       end
       
-      def find_comment_for_method
-        results_class.method_list.find { |method_name| method_name.name == @task.name.to_s }.comment
+      def find_method
+        results_class.method_list.find { |method_name| method_name.name == @task.name.to_s }
       end
   end
 end
