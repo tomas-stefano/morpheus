@@ -3,13 +3,17 @@ require 'rdoc/rdoc.rb'
 module Morpheus
   # Class responsible to parse the description of all tasks
   #
+  # ==== Parameters
+  # task<Morpheus::Task>: Receives an object that is a Morpheus::Task
+  #
   # ==== Examples
   #
   #  # This is a description of the task banner
   #  def banner
   #  end
   #
-  # The Description instance will parse the task banner 
+  # Description.new(task_banner).parse! # => "This is a description of the task banner"
+  #
   #
   class Description < String
     attr_reader :results
@@ -24,7 +28,8 @@ module Morpheus
       end
     end
 
-    # Parse the task search through the comment for the given method in the given namespace
+    # Parse the task search through the comment for the given method 
+    # in the given namespace
     # If the file don't exist, return an empty string
     #
     def parse!
@@ -55,11 +60,15 @@ module Morpheus
     
     private
       def results_class
-        @results_class ||= results.classes.find { |klass| klass.name == "#{@task.namespace}" }
+        @results_class ||= results.classes.find do |klass| 
+          klass.name == "#{@task.namespace}" 
+        end
       end
       
       def find_method
-        results_class.method_list.find { |method_name| method_name.name == @task.name.to_s }
+        results_class.method_list.find do |method_name| 
+          method_name.name == @task.name.to_s
+        end
       end
   end
 end
