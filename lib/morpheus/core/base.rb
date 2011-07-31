@@ -91,6 +91,12 @@ module Morpheus
         tasks.find { |task| task.name.equal?(task_name) }
       end
       
+      # Invoke a task by name
+      #
+      def invoke(task_name)
+        find_task(task_name).run
+      end
+      
       # Set another Description class that will be used to parse the description in the self scope.
       #
       def description=(description_class)
