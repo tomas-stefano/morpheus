@@ -4,6 +4,7 @@ source :rubygems
 group :deps do
   gem 'active_support'
   gem 'i18n'
+  gem 'ronn'
 end
 
 group :test do
