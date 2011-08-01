@@ -48,6 +48,7 @@ module Morpheus
       #
       #   ruby 'file.rb'
       #   ruby '-Ilib file.rb'
+      #   ruby '-w', '-Ilib', 'file.rb'
       #
       def ruby(string)
       end

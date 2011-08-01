@@ -1,5 +1,6 @@
 module Morpheus
   class Base
+    include Morpheus::ShellHelpers
     class << self
       # Everytime someone inherits from Morpheus::Base class, register the klass into baseclass.
       #
