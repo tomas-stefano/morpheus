@@ -18,6 +18,23 @@ module Morpheus
         @subclasses ||= []
       end
       
+      # Options to parse and create and #options instance method that is a parsed result from this 
+      # options.
+      # 
+      # ==== Parameters
+      #   user_options<Hash>: the values may only be: :string, :hash, :boolean, :numeric
+      #
+      # ==== Examples
+      #
+      # class GitExample < Morpheus::Binary
+      #   options :squash => :string, :author => :string
+      # end
+      #
+      def options(user_options={})
+        @options = user_options unless user_options.empty?
+        @options
+      end
+      
       # Setup the default task to run when not pass any ARGV in the command line
       #
       # ==== Examples

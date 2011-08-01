@@ -23,5 +23,11 @@ module Morpheus
         GitExample.new.run!.should == "Git clone!"
       end
     end
+    
+    describe ".options" do
+      it "should return the options setup in the Binary scope" do
+        GitExample.options.should == {:squash => :string, :author => :string}
+      end
+    end
   end
 end
