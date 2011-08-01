@@ -11,6 +11,7 @@ module Morpheus
     autoload :Matchers, 'morpheus/main/matchers'
     autoload :Requirable, 'morpheus/main/requirable'
     autoload :Runner, 'morpheus/main/runner'
+    autoload :ShellHelpers, 'morpheus/main/shell_helpers'
   end
   
   module Internals

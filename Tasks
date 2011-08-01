@@ -5,4 +5,5 @@ class MorpheusTasks < Morpheus::Base
   cucumber :format => :progress, :ruby_versions => %w(1.9.2 ree jruby rbx)
   rdoc :doc, :title => 'Morpheus - Task Framework'
   stats
+  console
 end

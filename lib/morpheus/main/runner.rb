@@ -3,20 +3,16 @@ module Morpheus
     # The Morpheus Binary to list tasks, helpers, run tasks, generators
     #
     class Runner < ::Morpheus::Binary
-      # options
-      #
-      # def list
-      # end
-      #
-      # def invoke
-      # end
-      #
-      # def run!
-      # end
-      #
-      # def banner
-      # end
-      #
+      # flag %w(--help -h) => :help, '-T' => :list
+      
+      def default
+      end
+      
+      def list
+      end
+      
+      def help
+      end
     end
   end
 end

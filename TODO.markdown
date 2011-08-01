@@ -168,12 +168,14 @@ In the Morpheus Core will exist this tasks:
 
 * Create a many shell helpers to use in the tasks. Shell Helpers:
 
-		# ask - Make a question
-		# say - Say something in a stream
-		# run - Run an shell command
-		# git - Run a git command
-		# ruby - Run the ruby command
-		# mysql - Run the mysql command
+		# run    - Run an shell command
+		# ask    - Make a question
+		# say    - Say something in a stream
+		# git    - Run a git command
+		# ruby   - Run the ruby command
+		# python - Run the python command
+		# gcc    - Run the gcc command
+		# make   - Run the make command
 
 #### Options Parser
 
@@ -199,11 +201,11 @@ Suppose that I want to create a binary file called super_ls to list some directo
      class SuperLs < Morpheus::Binary
        options :root => :boolean, :usr => :string
        
-       run do
+	   def run
          if root? # options[:root] == true
            system('ls /')
          end
-       end
+	   end
      end
 
      SuperLs.run!(ARGV)
