@@ -73,17 +73,17 @@ module Morpheus
 
     describe "#run" do
       it "should be possible to run a task" do
-        App.find_task(:list).run.should == "Listing ..."
+        App.find_task(:list).call.should == "Listing ..."
       end
       
       it "should be possible to run a provided task" do
-        SimpleTasks.find_task(:provided_example_task).run.should == {:format => :doc, :ls => true}
+        SimpleTasks.find_task(:provided_example_task).call.should == {:format => :doc, :ls => true}
       end
       
       it "should raise error when not have the run method in the subclass" do
         expect {
-          SimpleTasks.find_task(:without_run_method).run
-        }.to raise_error(NoMethodError, "The class #{WithoutRunMethod} don't have the method #run. The Morpheus convention is to call the #run method for Method::Task subclasses.")
+          SimpleTasks.find_task(:without_call_method).call
+        }.to raise_error(NoMethodError, "The class #{WithoutCallMethod} don't have the method #call. The Morpheus convention is to call the #call method for Method::Task subclasses.")
       end
     end
   end

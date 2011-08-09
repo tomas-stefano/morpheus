@@ -1,4 +1,4 @@
 class RubygemsTask < Morpheus::Task
-  def run
+  def call
   end
 end

@@ -1,4 +1,4 @@
 class BackupTask < Morpheus::Task
-  def run
+  def call
   end
 end

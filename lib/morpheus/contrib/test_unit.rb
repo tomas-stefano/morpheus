@@ -1,4 +1,4 @@
 class TestUnitTask < Morpheus::Task
-  def run
+  def call
   end
 end

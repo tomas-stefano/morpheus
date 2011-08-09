@@ -1,5 +1,5 @@
 class ExampleTask < Morpheus::Task
-  def run
+  def call
     options
   end
 end

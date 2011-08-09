@@ -80,19 +80,19 @@ module Morpheus
     # ==== Conventions
     #
     #    class RdocTask < Morpheus::Task
-    #      def run
+    #      def call
     #      end
     #    end
     #
-    # Then will create a instance RdocTask and call #run
+    # Then will create a instance RdocTask and call #call
     #
-    def run
-      raise NoMethodError, "The class #{self.class} don't have the method #run. The Morpheus convention is to call the #run method for Method::Task subclasses." unless @namespace
+    def call
+      raise NoMethodError, "The class #{self.class} don't have the method #call. The Morpheus convention is to call the #call method for Method::Task subclasses." unless @namespace
       namespace_instance = @namespace.instance
       if namespace_instance.respond_to?(@name)
         namespace_instance.send(@name)
       else
-        provided_instance.run
+        provided_instance.call
       end
     end
   end

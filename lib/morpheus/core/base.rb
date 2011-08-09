@@ -95,7 +95,7 @@ module Morpheus
       # Invoke a task by name
       #
       def invoke(task_name)
-        find_task(task_name).run
+        find_task(task_name).call
       end
       
       # Set another Description class that will be used to parse the description in the self scope.

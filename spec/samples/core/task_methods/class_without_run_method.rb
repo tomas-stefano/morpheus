@@ -1,4 +1,4 @@
-class WithoutRunMethod < Morpheus::Task
+class WithoutCallMethod < Morpheus::Task
 end
 
 Morpheus::Task.register_methods

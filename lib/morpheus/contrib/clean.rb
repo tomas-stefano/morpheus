@@ -1,4 +1,4 @@
 class CleanTask < Morpheus::Task
-  def run
+  def call
   end
 end

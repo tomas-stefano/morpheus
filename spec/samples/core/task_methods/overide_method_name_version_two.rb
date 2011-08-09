@@ -1,7 +1,7 @@
 class RdocExample < Morpheus::Task
   method_name :rdocxyz
 
-  def run
+  def call
     'Running rdocxyz task'
   end
 end

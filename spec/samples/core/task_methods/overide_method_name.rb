@@ -3,7 +3,7 @@ class RubygemExample < Morpheus::Task
     :rubygems
   end
 
-  def run
+  def call
     'Running rubygems method'
   end
 end
