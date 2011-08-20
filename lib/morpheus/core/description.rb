@@ -14,7 +14,6 @@ module Morpheus
   #
   # Description.new(task_banner).parse! # => "This is a description of the task banner"
   #
-  #
   class Description < String
     attr_reader :results
     def initialize(task)

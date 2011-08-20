@@ -7,5 +7,11 @@ module Morpheus
         Generator.subclasses.should include(ControllerGenerator, CrudGenerator)
       end
     end
+    
+    describe ".method_added" do
+      it "should include all methods added as a task to run" do
+        pending
+      end
+    end
   end
 end

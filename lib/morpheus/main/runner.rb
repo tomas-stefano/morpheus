@@ -6,9 +6,11 @@ module Morpheus
       # flag %w(--help -h) => :help, '-T' => :list
       
       def default
+        # find_default_task
       end
       
       def list
+        # when it calls task list call this methi
       end
       
       def help

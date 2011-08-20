@@ -56,7 +56,7 @@ module Morpheus
       @argv = argv.clone
     end
     
-    # Method resposible to handle the options/arguments parser and run! the binary
+    # Method responsible to handle the options/arguments parser and run! the binary
     #
     def run!
       if @argv.empty?

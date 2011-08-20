@@ -36,32 +36,12 @@ Will list all the tasks in each namespace.
    1º Alternative:
 
          class Tasks < Morpheus::Base
+           # This is a description of the task
+           #
            def this_is_a_task
              # ...
            end
          end
-
-   2º Alternative: (Need to think more about the DSL)
-
-        :lib.tasks do
-           :abc.task do
-              # ...
-           end
-        end
-
-#### Nested Namespaces (Need to think more about the DSL method)
-
-    :time.tasks do
-       :zones.tasks do
-         :list.task do
-           # list timezones
-         end
-       end
-    end
-
-Run with
-
-    $ task time:zones:list
 
 #### Provide tasks
 
@@ -72,7 +52,7 @@ In case you need an existent task called rspec for example:
      end
 
      class RSpecTask < Morpheus::Task
-       def run
+       def call
          # puts options # options will be a method and in this case will return # => { :color => true, :format => :doc }
        end
      end
@@ -84,11 +64,11 @@ It's possible to use a block to:
          name :core
          ext_dir 'ext/core'
          lib_dir 'my_lib/core'
-	   end
+	     end
      end
 
      class RubyExtensionTask < Morpheus::Task
-       def run
+       def call
          # will be a method called #action that will return a proc object
        end
      end
@@ -201,7 +181,7 @@ Suppose that I want to create a binary file called super_ls to list some directo
      class SuperLs < Morpheus::Binary
        options :root => :boolean, :usr => :string
        
-	   def run
+	   def call
          if root? # options[:root] == true
            system('ls /')
          end
