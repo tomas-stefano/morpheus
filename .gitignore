@@ -9,3 +9,5 @@ tmp/*
 rerun.txt
 .bundle/*
 test/*
+.ruby-version
+Gemfile.lock
