@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["tomas_stefano@successoft.com"]
   spec.description   = %q{TODO: Write a gem description}
   spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/tomas-stefano/morpheus"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
