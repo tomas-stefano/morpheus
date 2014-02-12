@@ -5,4 +5,5 @@ module Morpheus
   extend ActiveSupport::Autoload
 
   autoload :Adapters
+  autoload :FullTextSearch
 end
