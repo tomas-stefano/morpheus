@@ -5,6 +5,7 @@ module Morpheus
   extend ActiveSupport::Autoload
 
   autoload :Adapters
+  autoload :Core
   autoload :FullTextSearch
   autoload :Persistence
   autoload :QueryMethods
