@@ -6,4 +6,5 @@ module Morpheus
 
   autoload :Adapters
   autoload :FullTextSearch
+  autoload :Persistence
 end
