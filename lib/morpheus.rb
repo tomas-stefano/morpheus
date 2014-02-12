@@ -7,5 +7,6 @@ module Morpheus
   autoload :Adapters
   autoload :FullTextSearch
   autoload :Persistence
+  autoload :QueryMethods
   autoload :Relation
 end
