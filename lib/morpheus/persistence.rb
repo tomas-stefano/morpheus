@@ -1,4 +1,4 @@
 module Morpheus
-  class Persistence
+  module Persistence
   end
 end
