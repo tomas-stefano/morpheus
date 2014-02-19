@@ -8,6 +8,7 @@ module Morpheus
   autoload :Core
   autoload :FullTextSearch
   autoload :Persistence
+  autoload :Querying
   autoload :QueryMethods
   autoload :Relation
 end

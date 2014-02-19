@@ -5,7 +5,7 @@ module Morpheus
     included do
       include Core
       include Persistence
-      include QueryMethods
+      include Querying
       include Relation
     end
   end
