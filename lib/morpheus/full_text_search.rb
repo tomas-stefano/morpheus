@@ -6,7 +6,6 @@ module Morpheus
       include Core
       include Persistence
       include Querying
-      include Relation
     end
   end
 end
