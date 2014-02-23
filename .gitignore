@@ -2,7 +2,7 @@
 *.sw?
 .DS_STORE
 .DS_Store
-log*
+.log*
 pkg*
 temporary
 tmp/*
