@@ -7,6 +7,7 @@ module Morpheus
   autoload :Adapters
   autoload :Core
   autoload :FullTextSearch
+  autoload :LogSubscriber
   autoload :Persistence
   autoload :Querying
   autoload :QueryMethods
