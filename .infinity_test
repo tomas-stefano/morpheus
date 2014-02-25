@@ -1,10 +1,6 @@
-#!/usr/bin/env ruby
-
-infinity_test do
-  use :test_framework => :rspec, :verbose => true
-  
-  before(:all) do
-    clear :terminal
-  end
+InfinityTest.setup do |config|
+  config.test_framework   = :rspec
+  config.framework        = :rubygems
+  config.strategy         = :ruby_default
+  config.verbose          = true
 end
-
