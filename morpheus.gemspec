@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Morpheus::VERSION
   spec.authors       = ["Tomas D'Stefano"]
   spec.email         = ["tomas_stefano@successoft.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Full text search}
+  spec.summary       = %q{Full text search}
   spec.homepage      = "https://github.com/tomas-stefano/morpheus"
   spec.license       = "MIT"
 
